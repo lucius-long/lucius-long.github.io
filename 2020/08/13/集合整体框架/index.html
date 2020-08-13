@@ -22,20 +22,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="集合整体框架 所有集合类都位于java.util包下。Java的集合类主要由两个接口派生而出：Collection和Map，Collection和Map是Java集合框架的根接口，这两个接口又包含了一些子接口或实现类 1.collection部分扩展开提供了三大类集合，分别是： List List，也就是我们前面介绍最多的有序集合，它提供了方便的访问、插入、删除等操作。 几个主要实现包括Linke">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/08/12/hello-world/index.html">
+<meta property="og:title" content="BLOG">
+<meta property="og:url" content="http://yoursite.com/2020/08/13/%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6/index.html">
 <meta property="og:site_name" content="BLOG">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="集合整体框架 所有集合类都位于java.util包下。Java的集合类主要由两个接口派生而出：Collection和Map，Collection和Map是Java集合框架的根接口，这两个接口又包含了一些子接口或实现类 1.collection部分扩展开提供了三大类集合，分别是： List List，也就是我们前面介绍最多的有序集合，它提供了方便的访问、插入、删除等操作。 几个主要实现包括Linke">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-08-12T15:46:53.738Z">
-<meta property="article:modified_time" content="2020-08-12T15:46:53.738Z">
+<meta property="og:image" content="c:/Users/longy/Desktop/工作准备/图片文件/集合框架.jpg">
+<meta property="article:published_time" content="2020-08-13T15:41:35.906Z">
+<meta property="article:modified_time" content="2020-08-13T15:42:26.719Z">
 <meta property="article:author" content="Lucius Long">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/longy/Desktop/工作准备/图片文件/集合框架.jpg">
 
 
-<link rel="canonical" href="http://yoursite.com/2020/08/12/hello-world/">
+<link rel="canonical" href="http://yoursite.com/2020/08/13/%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6/">
 
 
 <script class="page-configurations">
@@ -48,7 +50,7 @@
   };
 </script>
 
-  <title>Hello World | BLOG</title>
+  <title> | BLOG</title>
   
 
 
@@ -149,7 +151,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">集合整体框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-collection%E9%83%A8%E5%88%86"><span class="nav-number">1.1.</span> <span class="nav-text">1.collection部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Map%E9%83%A8%E5%88%86"><span class="nav-number">1.2.</span> <span class="nav-text">2.Map部分</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -162,7 +164,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -199,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/12/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -215,7 +217,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          
         </h1>
 
         <div class="post-meta">
@@ -224,8 +226,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-08-12 23:46:53" itemprop="dateCreated datePublished" datetime="2020-08-12T23:46:53+08:00">2020-08-12</time>
+              <time title="Created: 2020-08-13 23:41:35 / Modified: 23:42:26" itemprop="dateCreated datePublished" datetime="2020-08-13T23:41:35+08:00">2020-08-13</time>
             </span>
 
           
@@ -237,19 +240,24 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h1 id="集合整体框架"><a href="#集合整体框架" class="headerlink" title="集合整体框架"></a>集合整体框架</h1><p><img src="C:\Users\longy\Desktop\工作准备\图片文件\集合框架.jpg" alt="img"></p>
+<p>所有集合类都位于<code>java.util</code>包下。Java的集合类主要由两个接口派生而出：Collection和Map，Collection和Map是Java集合框架的根接口，这两个接口又包含了一些子接口或实现类</p>
+<h2 id="1-collection部分"><a href="#1-collection部分" class="headerlink" title="1.collection部分"></a>1.collection部分</h2><p>扩展开提供了三大类集合，分别是：</p>
+<p><strong>List</strong></p>
+<p>List，也就是我们前面介绍最多的有序集合，它提供了方便的访问、插入、删除等操作。</p>
+<p>几个主要实现包括<strong>Linkedlist，ArrayList</strong></p>
+<p><strong>Set</strong></p>
+<p>Set 是不允许重复元素的，这是和 List 最明显的区别，也就是不存在两个对象 equals 返回 true。我们在日常开发中有很多需要保证元素唯一性的场合。</p>
+<p>以 Set 的几个实现为例：</p>
+<p><strong>TreeSet</strong> 支持自然顺序访问，但是添加、删除、包含等操作要相对低效（log(n) 时间）。</p>
+<p><strong>HashSet</strong> 则是利用哈希算法，理想情况下，如果哈希散列正常，可以提供常数时间的添加、删除、包含等操作，但是它不保证有序。</p>
+<p><strong>LinkedHashSet</strong>，内部构建了一个记录插入顺序的双向链表，因此提供了按照插入顺序遍历的能力，与此同时，也保证了常数时间的添加、删除、包含等操作，这些操作性能略低于 HashSet，因为需要维护链表的开销。在遍历元素时，HashSet 性能受自身容量影响，所以初始化时，除非有必要，不然不要将其背后的 HashMap 容量设置过大。而对于 LinkedHashSet，由于其内部链表提供的方便，遍历性能只和元素多少有关系。</p>
+<p><strong>Queue/Deque</strong></p>
+<p>则是 Java 提供的标准队列结构的实现，除了集合的基本功能，它还支持类似先入先出（FIFO， First-in-First-Out）或者后入先出（LIFO，Last-In-First-Out）等特定行为。这里不包括 BlockingQueue，因为通常是并发编程场合，所以被放置在并发包里。</p>
+<h2 id="2-Map部分"><a href="#2-Map部分" class="headerlink" title="2.Map部分"></a>2.Map部分</h2><p>Hashtable、HashMap、TreeMap 都是最常见的一些 Map 实现，是以键值对的形式存储和操作数据的容器类型。</p>
+<p><strong>Hashtable</strong> 是早期 Java 类库提供的一个哈希表实现，本身是同步的，不支持 null 键和值，由于<strong>同步导致的性能开销</strong>，所以已经很少被推荐使用。</p>
+<p><strong>HashMap</strong> 是应用更加广泛的哈希表实现，行为上大致上与 HashTable 一致，主要区别在于 HashMap 不是同步的，支持 null 键和值等。通常情况下，HashMap 进行 put 或者 get 操作，可以达到常数时间的性能，所以它是绝大部分利用键值对存取场景的首选，比如，实现一个用户 ID 和用户信息对应的运行时存储结构。</p>
+<p><strong>TreeMap</strong> 则是基于红黑树的一种提供<strong>顺序访问</strong>的 Map，和 HashMap 不同，它的 get、put、remove 之类操作都是 O（log(n)）的时间复杂度，具体顺序可以由指定的 Comparator 来决定，或者根据键的自然顺序来判断。</p>
 
     </div>
 
@@ -263,9 +271,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2020/08/13/Concurrenthashmap/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/08/13/%E5%AF%B9%E6%AF%94%20Hashtable%E3%80%81HashMap%E3%80%81TreeMap/" rel="next" title="">
+                <a href="/2020/08/13/GC%E7%AE%97%E6%B3%95-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" rel="next" title="">
                    <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
