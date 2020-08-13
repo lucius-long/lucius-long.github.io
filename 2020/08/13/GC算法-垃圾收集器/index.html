@@ -24,7 +24,7 @@
 
   <meta name="description" content="GC算法 垃圾收集器1.对象存活判断引用计数：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。可达性分析（Reachability Analysis）：从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。不可达对象。 在Java语">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BLOG">
+<meta property="og:title" content="GC算法和垃圾收集器">
 <meta property="og:url" content="http://yoursite.com/2020/08/13/GC%E7%AE%97%E6%B3%95-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/index.html">
 <meta property="og:site_name" content="BLOG">
 <meta property="og:description" content="GC算法 垃圾收集器1.对象存活判断引用计数：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。可达性分析（Reachability Analysis）：从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。不可达对象。 在Java语">
@@ -36,8 +36,8 @@
 <meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorMmqL4XiaoBlyRy1ziascfFousWcicSvFxOrFN2GIIgyiagPaWljnbtMzibg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjornTUQo5RqW79icN3rDRuZ4bl8Y2GU8q7CuM73hJwQpia5Ek52DicIpUDTQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjor8XeOMiay8P27IQnWawjlyJdvYriba2ae07zxODmvMOgHqVxCiazYnGia1g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
-<meta property="article:published_time" content="2020-08-13T15:43:40.804Z">
-<meta property="article:modified_time" content="2020-08-13T15:45:54.068Z">
+<meta property="article:published_time" content="2020-08-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-13T15:53:50.373Z">
 <meta property="article:author" content="Lucius Long">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorBnVw0K7iaaPwhicLhrpb8nibkgia2lkHzovEgPo2VC23QTr8EMpiaPxuFGw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
@@ -56,7 +56,7 @@
   };
 </script>
 
-  <title> | BLOG</title>
+  <title>GC算法和垃圾收集器 | BLOG</title>
   
 
 
@@ -223,7 +223,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          GC算法和垃圾收集器
         </h1>
 
         <div class="post-meta">
@@ -234,7 +234,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-13 23:43:40 / Modified: 23:45:54" itemprop="dateCreated datePublished" datetime="2020-08-13T23:43:40+08:00">2020-08-13</time>
+              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:53:50" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
             </span>
 
           
@@ -305,13 +305,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/08/13/%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6/" rel="prev" title="">
-                  <i class="fa fa-chevron-left"></i> 
+                <a href="/2020/08/13/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" rel="prev" title="JVM内存结构">
+                  <i class="fa fa-chevron-left"></i> JVM内存结构
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/08/13/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" rel="next" title="">
-                   <i class="fa fa-chevron-right"></i>
+                <a href="/2020/08/13/Hashmap/" rel="next" title="Hashmap">
+                  Hashmap <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

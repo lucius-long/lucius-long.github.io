@@ -193,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/Arraylist%E5%92%8CLinkedlist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -210,7 +210,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/13/%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2020/08/13/Arraylist%E5%92%8CLinkedlist/" class="post-title-link" itemprop="url">Arraylist和LinkedList的对比</a>
         </h2>
 
         <div class="post-meta">
@@ -221,7 +221,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-13 23:47:10 / Modified: 23:47:32" itemprop="dateCreated datePublished" datetime="2020-08-13T23:47:10+08:00">2020-08-13</time>
+              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:56:10" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
             </span>
 
           
@@ -233,413 +233,19 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="类的加载机制"><a href="#类的加载机制" class="headerlink" title="类的加载机制"></a>类的加载机制</h1><h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h2><p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个 <code>java.lang.Class</code>对象，用来封装类在方法区内的数据结构。类的加载的最终产品是位于堆区中的 <code>Class</code>对象， <code>Class</code>对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
-<p><strong>加载.class文件的方式</strong></p>
-<ul>
-<li>从本地系统中直接加载</li>
-<li>通过网络下载.class文件</li>
-<li>从zip，jar等归档文件中加载.class文件</li>
-<li>从专有数据库中提取.class文件</li>
-<li>将Java源文件动态编译为.class文件</li>
-</ul>
-<h2 id="2-类的生命周期"><a href="#2-类的生命周期" class="headerlink" title="2.类的生命周期"></a>2.类的生命周期</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnokxXiapDdvntH8PGwa0zGXMyIBnM38m8eKia8wAVY8aXb0NhM9wFNDLVuoFKIZ0Q2SBk5yibFgXsXOw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>其中类加载的过程包括了<strong>加载、验证、准备、解析、初始化</strong>五个阶段</p>
-<p>(后续补充)</p>
-<h2 id="3-类加载器"><a href="#3-类加载器" class="headerlink" title="3.类加载器"></a>3.类加载器</h2><p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnokxXiapDdvntH8PGwa0zGXM7qXKib1ibsib1BuyLxjoP1sgorwib78yTD4896N5r1AibdhDXTHZ7z9VyBg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>站在Java开发人员的角度来看，类加载器可以大致划分为以下三类：</p>
-<p><strong>启动类加载器</strong>： <code>BootstrapClassLoader</code>，负责加载存放在 <code>JDK\jre\lib</code>(JDK代表JDK的安装目录，下同)下，或被 <code>-Xbootclasspath</code>参数指定的路径中的，并且能被虚拟机识别的类库（如rt.jar，所有的java.开头的类均被 <code>BootstrapClassLoader</code>加载）。启动类加载器是无法被Java程序直接引用的。<br><strong>扩展类加载器</strong>： <code>ExtensionClassLoader</code>，该加载器由 <code>sun.misc.Launcher$ExtClassLoader</code>实现，它负责加载 <code>JDK\jre\lib\ext</code>目录中，或者由 <code>java.ext.dirs</code>系统变量指定的路径中的所有类库（如javax.开头的类），开发者可以直接使用扩展类加载器。<br><strong>应用程序类加载器</strong>： <code>ApplicationClassLoader</code>，该类加载器由 <code>sun.misc.Launcher$AppClassLoader</code>来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</p>
-<p><strong>自定义加载器</strong></p>
-<p><strong>JVM类加载机制</strong></p>
-<ul>
-<li><strong>全盘负责</strong>，当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入</li>
-<li><strong>父类委托</strong>，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类</li>
-<li><strong>缓存机制</strong>，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效</li>
-</ul>
-<h2 id="4-类的加载"><a href="#4-类的加载" class="headerlink" title="4.类的加载"></a>4.类的加载</h2><p>类加载有三种方式：</p>
-<ul>
-<li>1、命令行启动应用时候由JVM初始化加载</li>
-<li>2、通过Class.forName()方法动态加载</li>
-<li>3、通过ClassLoader.loadClass()方法动态加载</li>
-</ul>
-<p><strong>Class.forName()和ClassLoader.loadClass()区别</strong></p>
-<ul>
-<li><code>Class.forName()</code>：将类的.class文件加载到jvm中之外，还会对类进行解释，执行类中的static块；</li>
-<li><code>ClassLoader.loadClass()</code>：只干一件事情，就是将.class文件加载到jvm中，不会执行static中的内容,只有在newInstance才会去执行static块。</li>
-<li><code>Class.forName(name,initialize,loader)</code>带参函数也可控制是否加载static块。并且只有调用了newInstance()方法采用调用构造函数，创建类的对象 。</li>
-</ul>
-<h2 id="5-双亲委派模型"><a href="#5-双亲委派模型" class="headerlink" title="5.双亲委派模型"></a>5.双亲委派模型</h2><p>双亲委派模型的工作流程是：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。</p>
-<p>双亲委派机制:</p>
-<ul>
-<li>1、当 <code>AppClassLoader</code>加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器<code>ExtClassLoader</code>去完成。</li>
-<li>2、当 <code>ExtClassLoader</code>加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader```去完成。</li>
-<li>3、如果 <code>BootStrapClassLoader</code>加载失败（例如在 <code>$JAVA_HOME/jre/lib</code>里未查找到该class），会使用 <code>ExtClassLoader</code>来尝试加载；</li>
-<li>4、若ExtClassLoader也加载失败，则会使用 <code>AppClassLoader</code>来加载，如果 <code>AppClassLoader</code>也加载失败，则会报出异常 <code>ClassNotFoundException</code>。</li>
-</ul>
+          <h2 id="1-vector、arraylist、linkedlist的区别和对比"><a href="#1-vector、arraylist、linkedlist的区别和对比" class="headerlink" title="1.vector、arraylist、linkedlist的区别和对比"></a>1.vector、arraylist、linkedlist的区别和对比</h2><p>这三者都是实现集合框架中的 List，也就是所谓的有序集合，因此具体功能也比较近似，比如都提供按照位置进行定位、添加或者删除的操作，都提供迭代器以遍历其内容等。但因为具体的设计区别，在行为、性能、线程安全等方面，表现又有很大不同。</p>
+<p>Vector 是 Java 早期提供的线程安全的动态数组，如果不需要线程安全，并不建议选择，毕竟同步是有额外开销的。Vector 内部是使用对象数组来保存数据，可以根据需要自动的增加容量，当数组已满时，会创建新的数组，并拷贝原有数组数据。</p>
+<p>ArrayList 是应用更加广泛的动态数组实现，它本身不是线程安全的，所以性能要好很多。与 Vector 近似，ArrayList 也是可以根据需要调整容量，不过两者的调整逻辑有所区别，Vector 在扩容时会提高 1 倍，<strong>而 ArrayList 则是增加 50%（创建新数组，然后复制）</strong>。</p>
+<p>LinkedList 顾名思义是 Java 提供的双向链表，所以它不需要像上面两种那样调整容量，它也不是线程安全的。</p>
+<p>适用场景：</p>
+<p>Vector 和 ArrayList 作为动态数组，其内部元素以数组形式顺序存储的，所以非常适合<strong>随机访问</strong>的场合。除了尾部<strong>插入和删除</strong>元素，往往性能会相对较差，比如我们在中间位置插入一个元素，需要移动后续所有元素。</p>
+<p>而 LinkedList 进行节点<strong>插入、删除</strong>却要高效得多，但是随机访问性能则要比动态数组慢。</p>
+<h2 id="2-线程安全部分"><a href="#2-线程安全部分" class="headerlink" title="2.线程安全部分"></a>2.线程安全部分</h2><p>上述集合类都不是线程安全的，但是collection工具类中提供了方法实现线程安全</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List list &#x3D; Collections.synchronizedList(new ArrayList());</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lucius Long">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BLOG">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/13/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-08-13 23:46:21 / Modified: 23:46:44" itemprop="dateCreated datePublished" datetime="2020-08-13T23:46:21+08:00">2020-08-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnoUSbbnzEiafyyQWUibOfnE3GicpdRQOuxWBrhB3Fic7MRf4z5ywT2RmCicibGibHNQEgUbsibLR1eLVRfo3A/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>JVM内存结构主要有三大块：<strong>堆内存</strong>、<strong>方法区</strong>和<strong>栈</strong>。堆内存是JVM中最大的一块由年轻代和老年代组成，而年轻代内存又被分成三部分，<strong>Eden空间</strong>、<strong>From Survivor空间</strong>、<strong>To Survivor空间</strong>,默认情况下年轻代按照<strong>8:1:1</strong>的比例来分配；</p>
-<p><strong>方法区存储类信息、常量、静态变量等数据，是线程共享的区域</strong>，为与Java堆区分，方法区还有一个别名Non-Heap(非堆)；栈又分为java虚拟机栈和本地方法栈主要用于方法的执行。</p>
-<p>控制参数</p>
-<ul>
-<li>-Xms设置堆的最小空间大小。</li>
-<li>-Xmx设置堆的最大空间大小。</li>
-<li>-XX:NewSize设置新生代最小空间大小。</li>
-<li>-XX:MaxNewSize设置新生代最大空间大小。</li>
-<li>-XX:PermSize设置永久代最小空间大小。</li>
-<li>-XX:MaxPermSize设置永久代最大空间大小。</li>
-<li>-Xss设置每个线程的堆栈大小</li>
-</ul>
-<h2 id="2-详细分析"><a href="#2-详细分析" class="headerlink" title="2.详细分析"></a>2.详细分析</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnoUSbbnzEiafyyQWUibOfnE3G1sZG1aJZSakhFe5d6QeiciaO9ZIDfHrFS9UZx8RfWfkPk9UZLCVdcriaQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>方法区和对是所有线程共享的内存区域；而java栈、本地方法栈和程序员计数器是运行是线程私有的内存区域。</p>
-<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>对于大多数应用来说，Java堆（Java Heap）是Java虚拟机所管理的内存中<strong>最大</strong>的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放<strong>对象实例</strong>，<strong>几乎所有的对象实例都在这里分配内存</strong>。</p>
-<p>Java堆是垃圾收集器管理的主要区域，因此很多时候也被称做“<strong>GC堆</strong>”。如果从内存回收的角度看，由于现在收集器基本都是采用的分代收集算法，所以Java堆中还可以细分为：<strong>新生代和老年代；再细致一点的有Eden空间、From Survivor空间、To Survivor空间等。</strong></p>
-<p>根据Java虚拟机规范的规定，Java堆可以处于物理上不连续的内存空间中，只要逻辑上是连续的即可，就像我们的磁盘空间一样。在实现时，既可以实现成固定大小的，也可以是可扩展的，不过当前主流的虚拟机都是按照可扩展来实现的（通过-Xmx和-Xms控制）。</p>
-<p><strong>如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError异常。</strong></p>
-<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，<strong>它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</strong>虽然Java虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫做Non-Heap（非堆），目的应该是与Java堆区分开来。</p>
-<p>对于习惯在HotSpot虚拟机上开发和部署程序的开发者来说，很多人愿意把方法区称为“永久代”（Permanent Generation），本质上两者并不等价，仅仅是因为HotSpot虚拟机的设计团队选择把GC分代收集扩展至方法区，或者说使用永久代来实现方法区而已。</p>
-<p>Java虚拟机规范对这个区域的限制非常宽松，除了和Java堆一样不需要连续的内存和可以选择固定大小或者可扩展外，还可以选择不实现垃圾收集。相对而言，垃圾收集行为在这个区域是比较少出现的，但并非数据进入了方法区就如永久代的名字一样“永久”存在了。这个区域的内存回收目标主要是针对常量池的回收和对类型的卸载，一般来说这个区域的回收“成绩”比较难以令人满意，尤其是类型的卸载，条件相当苛刻，但是这部分区域的回收确实是有必要的。</p>
-<p>根据Java虚拟机规范的规定，<strong>当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</strong></p>
-<p><strong>通过JConsole工具可以查看运行中的Java程序（比如Eclipse）的一些信息：堆内存的分配，线程的数量以及加载的类的个数；</strong></p>
-<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器（Program Counter Register）是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里（仅是概念模型，各种虚拟机可能会通过一些更高效的方式去实现），字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p>
-<p>由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）只会执行一条线程中的指令。因此，为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各条线程之间的计数器互不影响，独立存储，我们称这类内存区域为“线程私有”的内存。</p>
-<p>如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是Natvie方法，这个计数器值则为空（Undefined）。</p>
-<p><strong>此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</strong></p>
-<h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><p>与程序计数器一样，Java虚拟机栈（Java Virtual Machine Stacks）也是线程私有的，<strong>它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：</strong>每个方法被执行的时候都会同时创建一个<strong>栈帧（Stack Frame</strong>）用于存储<strong>局部变量表、操作栈、动态链接、方法出口</strong>等信息。<strong>每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</strong></p>
-<p><strong>局部变量表存放了编译期可知的各种基本数据类型</strong>（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，它不等同于对象本身，根据不同的虚拟机实现，它可能是一个指向对象起始地址的引用指针，也可能指向一个代表对象的句柄或者其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。</p>
-<p>其中64位长度的long和double类型的数据会占用2个局部变量空间（Slot），其余的数据类型只占用1个。局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法需要在帧中分配多大的局部变量空间是完全确定的，在方法运行期间不会改变局部变量表的大小。</p>
-<p>在Java虚拟机规范中，对这个区域规定了两种异常状况：<strong>如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常</strong>；<strong>如果虚拟机栈可以动态扩展（当前大部分的Java虚拟机都可动态扩展，只不过Java虚拟机规范中也允许固定长度的虚拟机栈），当扩展时无法申请到足够的内存时会抛出OutOfMemoryError异常</strong>。</p>
-<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而<strong>本地方法栈则是为虚拟机使用到的Native方法服务。</strong>虚拟机规范中对本地方法栈中的方法使用的语言、使用方式与数据结构并没有强制规定，因此具体的虚拟机可以自由实现它。甚至有的虚拟机（譬如Sun HotSpot虚拟机）直接就把本地方法栈和虚拟机栈合二为一。与虚拟机栈一样，<strong>本地方法栈区域也会抛出StackOverflowError和OutOfMemoryError异常</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/GC%E7%AE%97%E6%B3%95-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lucius Long">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BLOG">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/13/GC%E7%AE%97%E6%B3%95-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-08-13 23:43:40 / Modified: 23:45:54" itemprop="dateCreated datePublished" datetime="2020-08-13T23:43:40+08:00">2020-08-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="GC算法-垃圾收集器"><a href="#GC算法-垃圾收集器" class="headerlink" title="GC算法 垃圾收集器"></a>GC算法 垃圾收集器</h1><h2 id="1-对象存活判断"><a href="#1-对象存活判断" class="headerlink" title="1.对象存活判断"></a>1.对象存活判断</h2><p><strong>引用计数</strong>：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。<br><strong>可达性分析</strong>（Reachability Analysis）：从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。不可达对象。</p>
-<p>在Java语言中，GC Roots包括：</p>
-<ul>
-<li>虚拟机栈中引用的对象。</li>
-<li>方法区中类静态属性实体引用的对象。</li>
-<li>方法区中常量引用的对象。</li>
-<li>本地方法栈中JNI引用的对象。</li>
-</ul>
-<h2 id="2-垃圾收集算法"><a href="#2-垃圾收集算法" class="headerlink" title="2.垃圾收集算法"></a>2.垃圾收集算法</h2><h4 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记 -清除算法"></a>标记 -清除算法</h4><p>“标记-清除”（Mark-Sweep）算法，如它的名字一样，算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收掉所有被标记的对象。之所以说它是最基础的收集算法，是因为后续的收集算法都是基于这种思路并对其缺点进行改进而得到的。</p>
-<p>它的主要缺点有两个：一个是效率问题，标记和清除过程的效率都不高；另外一个是空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致，当程序在以后的运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorBnVw0K7iaaPwhicLhrpb8nibkgia2lkHzovEgPo2VC23QTr8EMpiaPxuFGw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<h4 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h4><p>“复制”（Copying）的收集算法，它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。</p>
-<p>这样使得每次都是对其中的一块进行内存回收，内存分配时也就不用考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。只是这种算法的代价是将内存缩小为原来的一半，持续复制长生存期的对象则导致效率降低。</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorcDwjZkYkrJ4fpgTibYjMEDGVK81YIQWDpW0k1S9ibjxLvRz3848v91qg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<h4 id="标记-压缩算法"><a href="#标记-压缩算法" class="headerlink" title="标记-压缩算法"></a>标记-压缩算法</h4><p>复制收集算法在对象存活率较高时就要执行较多的复制操作，效率将会变低。更关键的是，如果不想浪费50%的空间，就需要有额外的空间进行分配担保，以应对被使用的内存中所有对象都100%存活的极端情况，所以在老年代一般不能直接选用这种算法。</p>
-<p>根据老年代的特点，有人提出了另外一种“标记-整理”（Mark-Compact）算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorH0wLYIx1oZ7fGo2uNUgB6dwGLYV3h7pJtMgficMpicMOhUENpStgSCog/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<h2 id="3-垃圾收集器"><a href="#3-垃圾收集器" class="headerlink" title="3.垃圾收集器"></a>3.垃圾收集器</h2><h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p>CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。目前很大一部分的Java应用都集中在互联网站或B/S系统的服务端上，这类应用尤其重视服务的响应速度，希望系统停顿时间最短，以给用户带来较好的体验。</p>
-<p>从名字（包含“Mark Sweep”）上就可以看出CMS收集器是基于“标记-清除”算法实现的，它的运作过程相对于前面几种收集器来说要更复杂一些，整个过程分为4个步骤，包括：</p>
-<ul>
-<li>初始标记（CMS initial mark）</li>
-<li>并发标记（CMS concurrent mark）</li>
-<li>重新标记（CMS remark）</li>
-<li>并发清除（CMS concurrent sweep）</li>
-</ul>
-<p>其中初始标记、重新标记这两个步骤仍然需要“Stop The World”。初始标记仅仅只是标记一下GC Roots能直接关联到的对象，速度很快，并发标记阶段就是进行GC Roots Tracing的过程，而重新标记阶段则是为了修正并发标记期间，因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始标记阶段稍长一些，但远比并发标记的时间短。</p>
-<p>由于整个过程中耗时最长的并发标记和并发清除过程中，收集器线程都可以与用户线程一起工作，所以总体上来说，CMS收集器的内存回收过程是与用户线程一起并发地执行。老年代收集器（新生代使用ParNew）</p>
-<p><strong>优点</strong>: 并发收集、低停顿<br><strong>缺点</strong>: 产生大量空间碎片、并发阶段会降低吞吐量</p>
-<h3 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h3><p>G1是目前技术发展的最前沿成果之一，HotSpot开发团队赋予它的使命是未来可以替换掉JDK1.5中发布的CMS收集器。与CMS收集器相比G1收集器有以下特点：</p>
-<ol>
-<li><strong>空间整合</strong>，G1收集器采用标记整理算法，不会产生内存空间碎片。分配大对象时不会因为无法找到连续空间而提前触发下一次GC。</li>
-<li><strong>可预测停顿</strong>，这是G1的另一大优势，降低停顿时间是G1和CMS的共同关注点，但G1除了追求低停顿外，还能建立可预测的停顿时间模型，能让使用者明确指定在一个长度为N毫秒的时间片段内，消耗在垃圾收集上的时间不得超过N毫秒，这几乎已经是实时Java（RTSJ）的垃圾收集器的特征了。</li>
-</ol>
-<p>上面提到的垃圾收集器，收集的范围都是整个新生代或者老年代，而G1不再是这样。使用G1收集器时，Java堆的内存布局与其他收集器有很大差别，它将整个Java堆划分为多个大小相等的独立区域（Region），虽然还保留有新生代和老年代的概念，但新生代和老年代不再是物理隔阂了，它们都是一部分（可以不连续）Region的集合。</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_jpg/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjoru5HeMdP7OnkFlDIpg71gf6utSNzcoH5E3BpzwZ9ytvFKHBxvf929Dw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>G1的新生代收集跟ParNew类似，当新生代占用达到一定比例的时候，开始出发收集。和CMS类似，G1收集器收集老年代对象会有短暂停顿。</p>
-<p>收集步骤：</p>
-<p>1、标记阶段，首先初始标记(Initial-Mark),这个阶段是停顿的(Stop the World Event)，并且会触发一次普通Mintor GC。对应GC log:GC pause (young) (inital-mark)</p>
-<p>2、Root Region Scanning，程序运行过程中会回收survivor区(存活到老年代)，这一过程必须在young GC之前完成。</p>
-<p>3、Concurrent Marking，在整个堆中进行并发标记(和应用程序并发执行)，此过程可能被young GC中断。在并发标记阶段，若发现区域对象中的所有对象都是垃圾，那个这个区域会被立即回收(图中打X)。同时，并发标记过程中，会计算每个区域的对象活性(区域中存活对象的比例)。</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorMmqL4XiaoBlyRy1ziascfFousWcicSvFxOrFN2GIIgyiagPaWljnbtMzibg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>4、Remark, 再标记，会有短暂停顿(STW)。再标记阶段是用来收集 并发标记阶段 产生新的垃圾(并发阶段和应用程序一同运行)；G1中采用了比CMS更快的初始快照算法:snapshot-at-the-beginning (SATB)。</p>
-<p>5、Copy/Clean up，多线程清除失活对象，会有STW。G1将回收区域的存活对象拷贝到新区域，清除Remember Sets，并发清空回收区域并把它返回到空闲区域链表中。</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjornTUQo5RqW79icN3rDRuZ4bl8Y2GU8q7CuM73hJwQpia5Ek52DicIpUDTQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>6、复制/清除过程后。回收区域的活性对象已经被集中回收到深蓝色和深绿色区域。</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjor8XeOMiay8P27IQnWawjlyJdvYriba2ae07zxODmvMOgHqVxCiazYnGia1g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lucius Long">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BLOG">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/13/%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-08-13 23:41:35 / Modified: 23:42:26" itemprop="dateCreated datePublished" datetime="2020-08-13T23:41:35+08:00">2020-08-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="集合整体框架"><a href="#集合整体框架" class="headerlink" title="集合整体框架"></a>集合整体框架</h1><p><img src="C:\Users\longy\Desktop\工作准备\图片文件\集合框架.jpg" alt="img"></p>
-<p>所有集合类都位于<code>java.util</code>包下。Java的集合类主要由两个接口派生而出：Collection和Map，Collection和Map是Java集合框架的根接口，这两个接口又包含了一些子接口或实现类</p>
-<h2 id="1-collection部分"><a href="#1-collection部分" class="headerlink" title="1.collection部分"></a>1.collection部分</h2><p>扩展开提供了三大类集合，分别是：</p>
-<p><strong>List</strong></p>
-<p>List，也就是我们前面介绍最多的有序集合，它提供了方便的访问、插入、删除等操作。</p>
-<p>几个主要实现包括<strong>Linkedlist，ArrayList</strong></p>
-<p><strong>Set</strong></p>
-<p>Set 是不允许重复元素的，这是和 List 最明显的区别，也就是不存在两个对象 equals 返回 true。我们在日常开发中有很多需要保证元素唯一性的场合。</p>
-<p>以 Set 的几个实现为例：</p>
-<p><strong>TreeSet</strong> 支持自然顺序访问，但是添加、删除、包含等操作要相对低效（log(n) 时间）。</p>
-<p><strong>HashSet</strong> 则是利用哈希算法，理想情况下，如果哈希散列正常，可以提供常数时间的添加、删除、包含等操作，但是它不保证有序。</p>
-<p><strong>LinkedHashSet</strong>，内部构建了一个记录插入顺序的双向链表，因此提供了按照插入顺序遍历的能力，与此同时，也保证了常数时间的添加、删除、包含等操作，这些操作性能略低于 HashSet，因为需要维护链表的开销。在遍历元素时，HashSet 性能受自身容量影响，所以初始化时，除非有必要，不然不要将其背后的 HashMap 容量设置过大。而对于 LinkedHashSet，由于其内部链表提供的方便，遍历性能只和元素多少有关系。</p>
-<p><strong>Queue/Deque</strong></p>
-<p>则是 Java 提供的标准队列结构的实现，除了集合的基本功能，它还支持类似先入先出（FIFO， First-in-First-Out）或者后入先出（LIFO，Last-In-First-Out）等特定行为。这里不包括 BlockingQueue，因为通常是并发编程场合，所以被放置在并发包里。</p>
-<h2 id="2-Map部分"><a href="#2-Map部分" class="headerlink" title="2.Map部分"></a>2.Map部分</h2><p>Hashtable、HashMap、TreeMap 都是最常见的一些 Map 实现，是以键值对的形式存储和操作数据的容器类型。</p>
-<p><strong>Hashtable</strong> 是早期 Java 类库提供的一个哈希表实现，本身是同步的，不支持 null 键和值，由于<strong>同步导致的性能开销</strong>，所以已经很少被推荐使用。</p>
-<p><strong>HashMap</strong> 是应用更加广泛的哈希表实现，行为上大致上与 HashTable 一致，主要区别在于 HashMap 不是同步的，支持 null 键和值等。通常情况下，HashMap 进行 put 或者 get 操作，可以达到常数时间的性能，所以它是绝大部分利用键值对存取场景的首选，比如，实现一个用户 ID 和用户信息对应的运行时存储结构。</p>
-<p><strong>TreeMap</strong> 则是基于红黑树的一种提供<strong>顺序访问</strong>的 Map，和 HashMap 不同，它的 get、put、remove 之类操作都是 O（log(n)）的时间复杂度，具体顺序可以由指定的 Comparator 来决定，或者根据键的自然顺序来判断。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/Concurrenthashmap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lucius Long">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BLOG">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/13/Concurrenthashmap/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-08-13 23:40:44 / Modified: 23:41:14" itemprop="dateCreated datePublished" datetime="2020-08-13T23:40:44+08:00">2020-08-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Concurrenthashmap-1-7-1-8的区别"><a href="#Concurrenthashmap-1-7-1-8的区别" class="headerlink" title="Concurrenthashmap(1.7/1.8的区别)"></a>Concurrenthashmap(1.7/1.8的区别)</h1><p>并发效率高的原因</p>
-<p>锁分段技术：首先将数据分成一段一段的存储，每一段配一把锁，当一个线程占用锁访问其中一个数据段的时候，其他段的数据也能被其他线程访问</p>
-<h2 id="1-1-7中的实现"><a href="#1-1-7中的实现" class="headerlink" title="1. 1.7中的实现"></a>1. 1.7中的实现</h2><p><img src="https://pic1.zhimg.com/v2-458d85ed1a2152458dd2a3b03360d340_b.jpg" alt="img"></p>
-<p>在1.7中是由 Segment 数组、HashEntry 组成，和 HashMap 一样，仍然是<strong>数组加链表</strong>。</p>
-<p>Segment 继承于 ReentrantLock(<strong>可重入锁</strong>)。理论上 ConcurrentHashMap 支持 CurrencyLevel (Segment 数组数量)的线程并发。</p>
-<p>HashEntry跟HashMap差不多的，但是不同点是，他使用<strong>volatile</strong>去修饰了他的数据Value还有下一个节点next。</p>
-<p>volatile：可见性，有序性，原子性</p>
-<h3 id="1-1-put操作"><a href="#1-1-put操作" class="headerlink" title="1.1 put操作"></a>1.1 put操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">final V put(K key, int hash, V value, boolean onlyIfAbsent) &#123;</span><br><span class="line">          &#x2F;&#x2F; 将当前 Segment 中的 table 通过 key 的 hashcode 定位到 HashEntry</span><br><span class="line">            HashEntry&lt;K,V&gt; node &#x3D; tryLock() ? null :</span><br><span class="line">                scanAndLockForPut(key, hash, value);</span><br><span class="line">            V oldValue;</span><br><span class="line">            try &#123;</span><br><span class="line">                HashEntry&lt;K,V&gt;[] tab &#x3D; table;</span><br><span class="line">                int index &#x3D; (tab.length - 1) &amp; hash;</span><br><span class="line">                HashEntry&lt;K,V&gt; first &#x3D; entryAt(tab, index);</span><br><span class="line">                for (HashEntry&lt;K,V&gt; e &#x3D; first;;) &#123;</span><br><span class="line">                    if (e !&#x3D; null) &#123;</span><br><span class="line">                        K k;</span><br><span class="line"> &#x2F;&#x2F; 遍历该 HashEntry，如果不为空则判断传入的 key 和当前遍历的 key 是否相等，相等则覆盖旧的 value。</span><br><span class="line">                        if ((k &#x3D; e.key) &#x3D;&#x3D; key ||</span><br><span class="line">                            (e.hash &#x3D;&#x3D; hash &amp;&amp; key.equals(k))) &#123;</span><br><span class="line">                            oldValue &#x3D; e.value;</span><br><span class="line">                            if (!onlyIfAbsent) &#123;</span><br><span class="line">                                e.value &#x3D; value;</span><br><span class="line">                                ++modCount;</span><br><span class="line">                            &#125;</span><br><span class="line">                            break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        e &#x3D; e.next;</span><br><span class="line">                    &#125;</span><br><span class="line">                    else &#123;</span><br><span class="line">                 &#x2F;&#x2F; 不为空则需要新建一个 HashEntry 并加入到 Segment 中，同时会先判断是否需要扩容。</span><br><span class="line">                        if (node !&#x3D; null)</span><br><span class="line">                            node.setNext(first);</span><br><span class="line">                        else</span><br><span class="line">                            node &#x3D; new HashEntry&lt;K,V&gt;(hash, key, value, first);</span><br><span class="line">                        int c &#x3D; count + 1;</span><br><span class="line">                        if (c &gt; threshold &amp;&amp; tab.length &lt; MAXIMUM_CAPACITY)</span><br><span class="line">                            rehash(node);</span><br><span class="line">                        else</span><br><span class="line">                            setEntryAt(tab, index, node);</span><br><span class="line">                        ++modCount;</span><br><span class="line">                        count &#x3D; c;</span><br><span class="line">                        oldValue &#x3D; null;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">               &#x2F;&#x2F;释放锁</span><br><span class="line">                unlock();</span><br><span class="line">            &#125;</span><br><span class="line">            return oldValue;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<p>先第一步的时候会尝试获取锁，如果获取失败肯定就有其他线程存在竞争，则利用 <code>scanAndLockForPut()</code> 自旋获取锁。</p>
-<ol>
-<li>尝试自旋获取锁。</li>
-<li>如果重试的次数达到了 <code>MAX_SCAN_RETRIES</code> 则改为阻塞锁获取，保证能获取成功。</li>
-</ol>
-<h3 id="1-2-get操作"><a href="#1-2-get操作" class="headerlink" title="1.2 get操作"></a>1.2 get操作</h3><p>get 逻辑比较简单，只需要将 Key 通过 Hash 之后定位到具体的 Segment ，再通过一次 Hash 定位到具体的元素上。</p>
-<p>由于 HashEntry 中的 value 属性是用 volatile 关键词修饰的，保证了内存可见性，所以每次获取时都是最新值。</p>
-<p>因为同样需要保证segment的分散性，所以segment也要为2的n次方</p>
-<h2 id="2-1-8中的实现"><a href="#2-1-8中的实现" class="headerlink" title="2.1.8中的实现"></a>2.1.8中的实现</h2><p>跟HashMap很像，也把之前的HashEntry改成了Node，但是作用不变，把值和next采用了volatile去修饰，保证了可见性，并且也引入了红黑树，在链表大于一定值的时候会转换（默认是8）。其中抛弃了原有的 Segment 分段锁，而采用了 <code>CAS + synchronized</code> 来保证并发安全性。</p>
-<h3 id="2-1-put操作"><a href="#2-1-put操作" class="headerlink" title="2.1 put操作"></a>2.1 put操作</h3><p>根据 key 计算出 hashcode 。</p>
-<p>判断是否需要进行初始化。</p>
-<p>即为当前 key 定位出的 Node，如果为空表示当前位置可以写入数据，利用 CAS 尝试写入，失败则自旋保证成功。</p>
-<p>如果当前位置的 <code>hashcode == MOVED == -1</code>,则需要进行扩容。</p>
-<p>如果都不满足，则利用 synchronized 锁写入数据。</p>
-<p>如果数量大于 <code>TREEIFY_THRESHOLD</code> 则要转换为红黑树。</p>
-<p>CAS —Compare and swap</p>
-<p>CAS 是乐观锁的一种实现方式，是一种轻量级锁，是一种乐观策略，认为并发操作并不总会发生。</p>
-<p>但是并不能保证绝对的并发安全，例如ABA问题(可以加时间戳或者版本号进行改进)</p>
-<h3 id="2-2-get操作"><a href="#2-2-get操作" class="headerlink" title="2.2 get操作"></a>2.2 get操作</h3><ul>
-<li>根据计算出来的 hashcode 寻址，如果就在桶上那么直接返回值。</li>
-<li>如果是红黑树那就按照树的方式获取值。</li>
-<li>就不满足那就按照链表的方式遍历获取值。</li>
-</ul>
+<p>它的实现，基本就是将每个基本方法，比如 get、set、add 之类，都通过 synchronized 添加基本的同步支持，非常简单粗暴，但也非常实用。注意这些方法创建的线程安全集合，都符合迭代时 fail-fast 行为，当发生意外的并发修改时，尽早抛出 ConcurrentModificationException 异常，以避免不可预计的行为。</p>
+<h2 id="3-排序部分"><a href="#3-排序部分" class="headerlink" title="3.排序部分"></a>3.排序部分</h2><p>对于<strong>原始数据类型</strong>，目前使用的是所谓双轴快速排序（Dual-Pivot QuickSort），是一种改进的快速排序算法，早期版本是相对传统的快速排序，你可以阅读源码。</p>
+<p>而对于<strong>对象数据类型</strong>，目前则是使用TimSort，思想上也是一种归并和二分插入排序（binarySort）结合的优化排序算法。TimSort 并不是 Java 的独创，简单说它的思路是查找数据集中已经排好序的分区（这里叫 run），然后合并这些分区来达到排序的目的。</p>
 
       
     </div>
@@ -676,7 +282,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/13/Hashmap/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2020/08/13/Hashmap/" class="post-title-link" itemprop="url">Hashmap</a>
         </h2>
 
         <div class="post-meta">
@@ -687,7 +293,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-13 23:39:23 / Modified: 23:40:13" itemprop="dateCreated datePublished" datetime="2020-08-13T23:39:23+08:00">2020-08-13</time>
+              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:54:24" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
             </span>
 
           
@@ -775,7 +381,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/Arraylist%E5%92%8CLinkedlist/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/GC%E7%AE%97%E6%B3%95-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -792,7 +398,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/13/Arraylist%E5%92%8CLinkedlist/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2020/08/13/GC%E7%AE%97%E6%B3%95-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" class="post-title-link" itemprop="url">GC算法和垃圾收集器</a>
         </h2>
 
         <div class="post-meta">
@@ -803,7 +409,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-13 23:38:21 / Modified: 23:38:56" itemprop="dateCreated datePublished" datetime="2020-08-13T23:38:21+08:00">2020-08-13</time>
+              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:53:50" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
             </span>
 
           
@@ -815,19 +421,419 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="1-vector、arraylist、linkedlist的区别和对比"><a href="#1-vector、arraylist、linkedlist的区别和对比" class="headerlink" title="1.vector、arraylist、linkedlist的区别和对比"></a>1.vector、arraylist、linkedlist的区别和对比</h2><p>这三者都是实现集合框架中的 List，也就是所谓的有序集合，因此具体功能也比较近似，比如都提供按照位置进行定位、添加或者删除的操作，都提供迭代器以遍历其内容等。但因为具体的设计区别，在行为、性能、线程安全等方面，表现又有很大不同。</p>
-<p>Vector 是 Java 早期提供的线程安全的动态数组，如果不需要线程安全，并不建议选择，毕竟同步是有额外开销的。Vector 内部是使用对象数组来保存数据，可以根据需要自动的增加容量，当数组已满时，会创建新的数组，并拷贝原有数组数据。</p>
-<p>ArrayList 是应用更加广泛的动态数组实现，它本身不是线程安全的，所以性能要好很多。与 Vector 近似，ArrayList 也是可以根据需要调整容量，不过两者的调整逻辑有所区别，Vector 在扩容时会提高 1 倍，<strong>而 ArrayList 则是增加 50%（创建新数组，然后复制）</strong>。</p>
-<p>LinkedList 顾名思义是 Java 提供的双向链表，所以它不需要像上面两种那样调整容量，它也不是线程安全的。</p>
-<p>适用场景：</p>
-<p>Vector 和 ArrayList 作为动态数组，其内部元素以数组形式顺序存储的，所以非常适合<strong>随机访问</strong>的场合。除了尾部<strong>插入和删除</strong>元素，往往性能会相对较差，比如我们在中间位置插入一个元素，需要移动后续所有元素。</p>
-<p>而 LinkedList 进行节点<strong>插入、删除</strong>却要高效得多，但是随机访问性能则要比动态数组慢。</p>
-<h2 id="2-线程安全部分"><a href="#2-线程安全部分" class="headerlink" title="2.线程安全部分"></a>2.线程安全部分</h2><p>上述集合类都不是线程安全的，但是collection工具类中提供了方法实现线程安全</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List list &#x3D; Collections.synchronizedList(new ArrayList());</span><br></pre></td></tr></table></figure>
+          <h1 id="GC算法-垃圾收集器"><a href="#GC算法-垃圾收集器" class="headerlink" title="GC算法 垃圾收集器"></a>GC算法 垃圾收集器</h1><h2 id="1-对象存活判断"><a href="#1-对象存活判断" class="headerlink" title="1.对象存活判断"></a>1.对象存活判断</h2><p><strong>引用计数</strong>：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。<br><strong>可达性分析</strong>（Reachability Analysis）：从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。不可达对象。</p>
+<p>在Java语言中，GC Roots包括：</p>
+<ul>
+<li>虚拟机栈中引用的对象。</li>
+<li>方法区中类静态属性实体引用的对象。</li>
+<li>方法区中常量引用的对象。</li>
+<li>本地方法栈中JNI引用的对象。</li>
+</ul>
+<h2 id="2-垃圾收集算法"><a href="#2-垃圾收集算法" class="headerlink" title="2.垃圾收集算法"></a>2.垃圾收集算法</h2><h4 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记 -清除算法"></a>标记 -清除算法</h4><p>“标记-清除”（Mark-Sweep）算法，如它的名字一样，算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收掉所有被标记的对象。之所以说它是最基础的收集算法，是因为后续的收集算法都是基于这种思路并对其缺点进行改进而得到的。</p>
+<p>它的主要缺点有两个：一个是效率问题，标记和清除过程的效率都不高；另外一个是空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致，当程序在以后的运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorBnVw0K7iaaPwhicLhrpb8nibkgia2lkHzovEgPo2VC23QTr8EMpiaPxuFGw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<h4 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h4><p>“复制”（Copying）的收集算法，它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。</p>
+<p>这样使得每次都是对其中的一块进行内存回收，内存分配时也就不用考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。只是这种算法的代价是将内存缩小为原来的一半，持续复制长生存期的对象则导致效率降低。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorcDwjZkYkrJ4fpgTibYjMEDGVK81YIQWDpW0k1S9ibjxLvRz3848v91qg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<h4 id="标记-压缩算法"><a href="#标记-压缩算法" class="headerlink" title="标记-压缩算法"></a>标记-压缩算法</h4><p>复制收集算法在对象存活率较高时就要执行较多的复制操作，效率将会变低。更关键的是，如果不想浪费50%的空间，就需要有额外的空间进行分配担保，以应对被使用的内存中所有对象都100%存活的极端情况，所以在老年代一般不能直接选用这种算法。</p>
+<p>根据老年代的特点，有人提出了另外一种“标记-整理”（Mark-Compact）算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorH0wLYIx1oZ7fGo2uNUgB6dwGLYV3h7pJtMgficMpicMOhUENpStgSCog/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<h2 id="3-垃圾收集器"><a href="#3-垃圾收集器" class="headerlink" title="3.垃圾收集器"></a>3.垃圾收集器</h2><h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p>CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。目前很大一部分的Java应用都集中在互联网站或B/S系统的服务端上，这类应用尤其重视服务的响应速度，希望系统停顿时间最短，以给用户带来较好的体验。</p>
+<p>从名字（包含“Mark Sweep”）上就可以看出CMS收集器是基于“标记-清除”算法实现的，它的运作过程相对于前面几种收集器来说要更复杂一些，整个过程分为4个步骤，包括：</p>
+<ul>
+<li>初始标记（CMS initial mark）</li>
+<li>并发标记（CMS concurrent mark）</li>
+<li>重新标记（CMS remark）</li>
+<li>并发清除（CMS concurrent sweep）</li>
+</ul>
+<p>其中初始标记、重新标记这两个步骤仍然需要“Stop The World”。初始标记仅仅只是标记一下GC Roots能直接关联到的对象，速度很快，并发标记阶段就是进行GC Roots Tracing的过程，而重新标记阶段则是为了修正并发标记期间，因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始标记阶段稍长一些，但远比并发标记的时间短。</p>
+<p>由于整个过程中耗时最长的并发标记和并发清除过程中，收集器线程都可以与用户线程一起工作，所以总体上来说，CMS收集器的内存回收过程是与用户线程一起并发地执行。老年代收集器（新生代使用ParNew）</p>
+<p><strong>优点</strong>: 并发收集、低停顿<br><strong>缺点</strong>: 产生大量空间碎片、并发阶段会降低吞吐量</p>
+<h3 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h3><p>G1是目前技术发展的最前沿成果之一，HotSpot开发团队赋予它的使命是未来可以替换掉JDK1.5中发布的CMS收集器。与CMS收集器相比G1收集器有以下特点：</p>
+<ol>
+<li><strong>空间整合</strong>，G1收集器采用标记整理算法，不会产生内存空间碎片。分配大对象时不会因为无法找到连续空间而提前触发下一次GC。</li>
+<li><strong>可预测停顿</strong>，这是G1的另一大优势，降低停顿时间是G1和CMS的共同关注点，但G1除了追求低停顿外，还能建立可预测的停顿时间模型，能让使用者明确指定在一个长度为N毫秒的时间片段内，消耗在垃圾收集上的时间不得超过N毫秒，这几乎已经是实时Java（RTSJ）的垃圾收集器的特征了。</li>
+</ol>
+<p>上面提到的垃圾收集器，收集的范围都是整个新生代或者老年代，而G1不再是这样。使用G1收集器时，Java堆的内存布局与其他收集器有很大差别，它将整个Java堆划分为多个大小相等的独立区域（Region），虽然还保留有新生代和老年代的概念，但新生代和老年代不再是物理隔阂了，它们都是一部分（可以不连续）Region的集合。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_jpg/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjoru5HeMdP7OnkFlDIpg71gf6utSNzcoH5E3BpzwZ9ytvFKHBxvf929Dw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p>G1的新生代收集跟ParNew类似，当新生代占用达到一定比例的时候，开始出发收集。和CMS类似，G1收集器收集老年代对象会有短暂停顿。</p>
+<p>收集步骤：</p>
+<p>1、标记阶段，首先初始标记(Initial-Mark),这个阶段是停顿的(Stop the World Event)，并且会触发一次普通Mintor GC。对应GC log:GC pause (young) (inital-mark)</p>
+<p>2、Root Region Scanning，程序运行过程中会回收survivor区(存活到老年代)，这一过程必须在young GC之前完成。</p>
+<p>3、Concurrent Marking，在整个堆中进行并发标记(和应用程序并发执行)，此过程可能被young GC中断。在并发标记阶段，若发现区域对象中的所有对象都是垃圾，那个这个区域会被立即回收(图中打X)。同时，并发标记过程中，会计算每个区域的对象活性(区域中存活对象的比例)。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorMmqL4XiaoBlyRy1ziascfFousWcicSvFxOrFN2GIIgyiagPaWljnbtMzibg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p>4、Remark, 再标记，会有短暂停顿(STW)。再标记阶段是用来收集 并发标记阶段 产生新的垃圾(并发阶段和应用程序一同运行)；G1中采用了比CMS更快的初始快照算法:snapshot-at-the-beginning (SATB)。</p>
+<p>5、Copy/Clean up，多线程清除失活对象，会有STW。G1将回收区域的存活对象拷贝到新区域，清除Remember Sets，并发清空回收区域并把它返回到空闲区域链表中。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjornTUQo5RqW79icN3rDRuZ4bl8Y2GU8q7CuM73hJwQpia5Ek52DicIpUDTQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p>6、复制/清除过程后。回收区域的活性对象已经被集中回收到深蓝色和深绿色区域。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjor8XeOMiay8P27IQnWawjlyJdvYriba2ae07zxODmvMOgHqVxCiazYnGia1g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
 
-<p>它的实现，基本就是将每个基本方法，比如 get、set、add 之类，都通过 synchronized 添加基本的同步支持，非常简单粗暴，但也非常实用。注意这些方法创建的线程安全集合，都符合迭代时 fail-fast 行为，当发生意外的并发修改时，尽早抛出 ConcurrentModificationException 异常，以避免不可预计的行为。</p>
-<h2 id="3-排序部分"><a href="#3-排序部分" class="headerlink" title="3.排序部分"></a>3.排序部分</h2><p>对于<strong>原始数据类型</strong>，目前使用的是所谓双轴快速排序（Dual-Pivot QuickSort），是一种改进的快速排序算法，早期版本是相对传统的快速排序，你可以阅读源码。</p>
-<p>而对于<strong>对象数据类型</strong>，目前则是使用TimSort，思想上也是一种归并和二分插入排序（binarySort）结合的优化排序算法。TimSort 并不是 Java 的独创，简单说它的思路是查找数据集中已经排好序的分区（这里叫 run），然后合并这些分区来达到排序的目的。</p>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/13/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">JVM内存结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:54:58" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnoUSbbnzEiafyyQWUibOfnE3GicpdRQOuxWBrhB3Fic7MRf4z5ywT2RmCicibGibHNQEgUbsibLR1eLVRfo3A/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p>JVM内存结构主要有三大块：<strong>堆内存</strong>、<strong>方法区</strong>和<strong>栈</strong>。堆内存是JVM中最大的一块由年轻代和老年代组成，而年轻代内存又被分成三部分，<strong>Eden空间</strong>、<strong>From Survivor空间</strong>、<strong>To Survivor空间</strong>,默认情况下年轻代按照<strong>8:1:1</strong>的比例来分配；</p>
+<p><strong>方法区存储类信息、常量、静态变量等数据，是线程共享的区域</strong>，为与Java堆区分，方法区还有一个别名Non-Heap(非堆)；栈又分为java虚拟机栈和本地方法栈主要用于方法的执行。</p>
+<p>控制参数</p>
+<ul>
+<li>-Xms设置堆的最小空间大小。</li>
+<li>-Xmx设置堆的最大空间大小。</li>
+<li>-XX:NewSize设置新生代最小空间大小。</li>
+<li>-XX:MaxNewSize设置新生代最大空间大小。</li>
+<li>-XX:PermSize设置永久代最小空间大小。</li>
+<li>-XX:MaxPermSize设置永久代最大空间大小。</li>
+<li>-Xss设置每个线程的堆栈大小</li>
+</ul>
+<h2 id="2-详细分析"><a href="#2-详细分析" class="headerlink" title="2.详细分析"></a>2.详细分析</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnoUSbbnzEiafyyQWUibOfnE3G1sZG1aJZSakhFe5d6QeiciaO9ZIDfHrFS9UZx8RfWfkPk9UZLCVdcriaQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p>方法区和对是所有线程共享的内存区域；而java栈、本地方法栈和程序员计数器是运行是线程私有的内存区域。</p>
+<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>对于大多数应用来说，Java堆（Java Heap）是Java虚拟机所管理的内存中<strong>最大</strong>的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放<strong>对象实例</strong>，<strong>几乎所有的对象实例都在这里分配内存</strong>。</p>
+<p>Java堆是垃圾收集器管理的主要区域，因此很多时候也被称做“<strong>GC堆</strong>”。如果从内存回收的角度看，由于现在收集器基本都是采用的分代收集算法，所以Java堆中还可以细分为：<strong>新生代和老年代；再细致一点的有Eden空间、From Survivor空间、To Survivor空间等。</strong></p>
+<p>根据Java虚拟机规范的规定，Java堆可以处于物理上不连续的内存空间中，只要逻辑上是连续的即可，就像我们的磁盘空间一样。在实现时，既可以实现成固定大小的，也可以是可扩展的，不过当前主流的虚拟机都是按照可扩展来实现的（通过-Xmx和-Xms控制）。</p>
+<p><strong>如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError异常。</strong></p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，<strong>它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</strong>虽然Java虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫做Non-Heap（非堆），目的应该是与Java堆区分开来。</p>
+<p>对于习惯在HotSpot虚拟机上开发和部署程序的开发者来说，很多人愿意把方法区称为“永久代”（Permanent Generation），本质上两者并不等价，仅仅是因为HotSpot虚拟机的设计团队选择把GC分代收集扩展至方法区，或者说使用永久代来实现方法区而已。</p>
+<p>Java虚拟机规范对这个区域的限制非常宽松，除了和Java堆一样不需要连续的内存和可以选择固定大小或者可扩展外，还可以选择不实现垃圾收集。相对而言，垃圾收集行为在这个区域是比较少出现的，但并非数据进入了方法区就如永久代的名字一样“永久”存在了。这个区域的内存回收目标主要是针对常量池的回收和对类型的卸载，一般来说这个区域的回收“成绩”比较难以令人满意，尤其是类型的卸载，条件相当苛刻，但是这部分区域的回收确实是有必要的。</p>
+<p>根据Java虚拟机规范的规定，<strong>当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</strong></p>
+<p><strong>通过JConsole工具可以查看运行中的Java程序（比如Eclipse）的一些信息：堆内存的分配，线程的数量以及加载的类的个数；</strong></p>
+<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器（Program Counter Register）是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里（仅是概念模型，各种虚拟机可能会通过一些更高效的方式去实现），字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p>
+<p>由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）只会执行一条线程中的指令。因此，为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各条线程之间的计数器互不影响，独立存储，我们称这类内存区域为“线程私有”的内存。</p>
+<p>如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是Natvie方法，这个计数器值则为空（Undefined）。</p>
+<p><strong>此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</strong></p>
+<h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><p>与程序计数器一样，Java虚拟机栈（Java Virtual Machine Stacks）也是线程私有的，<strong>它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：</strong>每个方法被执行的时候都会同时创建一个<strong>栈帧（Stack Frame</strong>）用于存储<strong>局部变量表、操作栈、动态链接、方法出口</strong>等信息。<strong>每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</strong></p>
+<p><strong>局部变量表存放了编译期可知的各种基本数据类型</strong>（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，它不等同于对象本身，根据不同的虚拟机实现，它可能是一个指向对象起始地址的引用指针，也可能指向一个代表对象的句柄或者其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。</p>
+<p>其中64位长度的long和double类型的数据会占用2个局部变量空间（Slot），其余的数据类型只占用1个。局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法需要在帧中分配多大的局部变量空间是完全确定的，在方法运行期间不会改变局部变量表的大小。</p>
+<p>在Java虚拟机规范中，对这个区域规定了两种异常状况：<strong>如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常</strong>；<strong>如果虚拟机栈可以动态扩展（当前大部分的Java虚拟机都可动态扩展，只不过Java虚拟机规范中也允许固定长度的虚拟机栈），当扩展时无法申请到足够的内存时会抛出OutOfMemoryError异常</strong>。</p>
+<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而<strong>本地方法栈则是为虚拟机使用到的Native方法服务。</strong>虚拟机规范中对本地方法栈中的方法使用的语言、使用方式与数据结构并没有强制规定，因此具体的虚拟机可以自由实现它。甚至有的虚拟机（譬如Sun HotSpot虚拟机）直接就把本地方法栈和虚拟机栈合二为一。与虚拟机栈一样，<strong>本地方法栈区域也会抛出StackOverflowError和OutOfMemoryError异常</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/13/%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">集合整体框架</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:55:36" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="集合整体框架"><a href="#集合整体框架" class="headerlink" title="集合整体框架"></a>集合整体框架</h1><p><img src="C:\Users\longy\Desktop\工作准备\图片文件\集合框架.jpg" alt="img"></p>
+<p>所有集合类都位于<code>java.util</code>包下。Java的集合类主要由两个接口派生而出：Collection和Map，Collection和Map是Java集合框架的根接口，这两个接口又包含了一些子接口或实现类</p>
+<h2 id="1-collection部分"><a href="#1-collection部分" class="headerlink" title="1.collection部分"></a>1.collection部分</h2><p>扩展开提供了三大类集合，分别是：</p>
+<p><strong>List</strong></p>
+<p>List，也就是我们前面介绍最多的有序集合，它提供了方便的访问、插入、删除等操作。</p>
+<p>几个主要实现包括<strong>Linkedlist，ArrayList</strong></p>
+<p><strong>Set</strong></p>
+<p>Set 是不允许重复元素的，这是和 List 最明显的区别，也就是不存在两个对象 equals 返回 true。我们在日常开发中有很多需要保证元素唯一性的场合。</p>
+<p>以 Set 的几个实现为例：</p>
+<p><strong>TreeSet</strong> 支持自然顺序访问，但是添加、删除、包含等操作要相对低效（log(n) 时间）。</p>
+<p><strong>HashSet</strong> 则是利用哈希算法，理想情况下，如果哈希散列正常，可以提供常数时间的添加、删除、包含等操作，但是它不保证有序。</p>
+<p><strong>LinkedHashSet</strong>，内部构建了一个记录插入顺序的双向链表，因此提供了按照插入顺序遍历的能力，与此同时，也保证了常数时间的添加、删除、包含等操作，这些操作性能略低于 HashSet，因为需要维护链表的开销。在遍历元素时，HashSet 性能受自身容量影响，所以初始化时，除非有必要，不然不要将其背后的 HashMap 容量设置过大。而对于 LinkedHashSet，由于其内部链表提供的方便，遍历性能只和元素多少有关系。</p>
+<p><strong>Queue/Deque</strong></p>
+<p>则是 Java 提供的标准队列结构的实现，除了集合的基本功能，它还支持类似先入先出（FIFO， First-in-First-Out）或者后入先出（LIFO，Last-In-First-Out）等特定行为。这里不包括 BlockingQueue，因为通常是并发编程场合，所以被放置在并发包里。</p>
+<h2 id="2-Map部分"><a href="#2-Map部分" class="headerlink" title="2.Map部分"></a>2.Map部分</h2><p>Hashtable、HashMap、TreeMap 都是最常见的一些 Map 实现，是以键值对的形式存储和操作数据的容器类型。</p>
+<p><strong>Hashtable</strong> 是早期 Java 类库提供的一个哈希表实现，本身是同步的，不支持 null 键和值，由于<strong>同步导致的性能开销</strong>，所以已经很少被推荐使用。</p>
+<p><strong>HashMap</strong> 是应用更加广泛的哈希表实现，行为上大致上与 HashTable 一致，主要区别在于 HashMap 不是同步的，支持 null 键和值等。通常情况下，HashMap 进行 put 或者 get 操作，可以达到常数时间的性能，所以它是绝大部分利用键值对存取场景的首选，比如，实现一个用户 ID 和用户信息对应的运行时存储结构。</p>
+<p><strong>TreeMap</strong> 则是基于红黑树的一种提供<strong>顺序访问</strong>的 Map，和 HashMap 不同，它的 get、put、remove 之类操作都是 O（log(n)）的时间复杂度，具体顺序可以由指定的 Comparator 来决定，或者根据键的自然顺序来判断。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/13/%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">类的加载机制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:56:04" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="类的加载机制"><a href="#类的加载机制" class="headerlink" title="类的加载机制"></a>类的加载机制</h1><h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h2><p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个 <code>java.lang.Class</code>对象，用来封装类在方法区内的数据结构。类的加载的最终产品是位于堆区中的 <code>Class</code>对象， <code>Class</code>对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
+<p><strong>加载.class文件的方式</strong></p>
+<ul>
+<li>从本地系统中直接加载</li>
+<li>通过网络下载.class文件</li>
+<li>从zip，jar等归档文件中加载.class文件</li>
+<li>从专有数据库中提取.class文件</li>
+<li>将Java源文件动态编译为.class文件</li>
+</ul>
+<h2 id="2-类的生命周期"><a href="#2-类的生命周期" class="headerlink" title="2.类的生命周期"></a>2.类的生命周期</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnokxXiapDdvntH8PGwa0zGXMyIBnM38m8eKia8wAVY8aXb0NhM9wFNDLVuoFKIZ0Q2SBk5yibFgXsXOw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p>其中类加载的过程包括了<strong>加载、验证、准备、解析、初始化</strong>五个阶段</p>
+<p>(后续补充)</p>
+<h2 id="3-类加载器"><a href="#3-类加载器" class="headerlink" title="3.类加载器"></a>3.类加载器</h2><p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnokxXiapDdvntH8PGwa0zGXM7qXKib1ibsib1BuyLxjoP1sgorwib78yTD4896N5r1AibdhDXTHZ7z9VyBg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p>站在Java开发人员的角度来看，类加载器可以大致划分为以下三类：</p>
+<p><strong>启动类加载器</strong>： <code>BootstrapClassLoader</code>，负责加载存放在 <code>JDK\jre\lib</code>(JDK代表JDK的安装目录，下同)下，或被 <code>-Xbootclasspath</code>参数指定的路径中的，并且能被虚拟机识别的类库（如rt.jar，所有的java.开头的类均被 <code>BootstrapClassLoader</code>加载）。启动类加载器是无法被Java程序直接引用的。<br><strong>扩展类加载器</strong>： <code>ExtensionClassLoader</code>，该加载器由 <code>sun.misc.Launcher$ExtClassLoader</code>实现，它负责加载 <code>JDK\jre\lib\ext</code>目录中，或者由 <code>java.ext.dirs</code>系统变量指定的路径中的所有类库（如javax.开头的类），开发者可以直接使用扩展类加载器。<br><strong>应用程序类加载器</strong>： <code>ApplicationClassLoader</code>，该类加载器由 <code>sun.misc.Launcher$AppClassLoader</code>来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</p>
+<p><strong>自定义加载器</strong></p>
+<p><strong>JVM类加载机制</strong></p>
+<ul>
+<li><strong>全盘负责</strong>，当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入</li>
+<li><strong>父类委托</strong>，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类</li>
+<li><strong>缓存机制</strong>，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效</li>
+</ul>
+<h2 id="4-类的加载"><a href="#4-类的加载" class="headerlink" title="4.类的加载"></a>4.类的加载</h2><p>类加载有三种方式：</p>
+<ul>
+<li>1、命令行启动应用时候由JVM初始化加载</li>
+<li>2、通过Class.forName()方法动态加载</li>
+<li>3、通过ClassLoader.loadClass()方法动态加载</li>
+</ul>
+<p><strong>Class.forName()和ClassLoader.loadClass()区别</strong></p>
+<ul>
+<li><code>Class.forName()</code>：将类的.class文件加载到jvm中之外，还会对类进行解释，执行类中的static块；</li>
+<li><code>ClassLoader.loadClass()</code>：只干一件事情，就是将.class文件加载到jvm中，不会执行static中的内容,只有在newInstance才会去执行static块。</li>
+<li><code>Class.forName(name,initialize,loader)</code>带参函数也可控制是否加载static块。并且只有调用了newInstance()方法采用调用构造函数，创建类的对象 。</li>
+</ul>
+<h2 id="5-双亲委派模型"><a href="#5-双亲委派模型" class="headerlink" title="5.双亲委派模型"></a>5.双亲委派模型</h2><p>双亲委派模型的工作流程是：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。</p>
+<p>双亲委派机制:</p>
+<ul>
+<li>1、当 <code>AppClassLoader</code>加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器<code>ExtClassLoader</code>去完成。</li>
+<li>2、当 <code>ExtClassLoader</code>加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader```去完成。</li>
+<li>3、如果 <code>BootStrapClassLoader</code>加载失败（例如在 <code>$JAVA_HOME/jre/lib</code>里未查找到该class），会使用 <code>ExtClassLoader</code>来尝试加载；</li>
+<li>4、若ExtClassLoader也加载失败，则会使用 <code>AppClassLoader</code>来加载，如果 <code>AppClassLoader</code>也加载失败，则会报出异常 <code>ClassNotFoundException</code>。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/12/Concurrenthashmap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/Concurrenthashmap/" class="post-title-link" itemprop="url">Concurrenthashmap</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-12 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-12T00:00:00+08:00">2020-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 23:52:59" itemprop="dateModified" datetime="2020-08-13T23:52:59+08:00">2020-08-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Concurrenthashmap-1-7-1-8的区别"><a href="#Concurrenthashmap-1-7-1-8的区别" class="headerlink" title="Concurrenthashmap(1.7/1.8的区别)"></a>Concurrenthashmap(1.7/1.8的区别)</h1><p>并发效率高的原因</p>
+<p>锁分段技术：首先将数据分成一段一段的存储，每一段配一把锁，当一个线程占用锁访问其中一个数据段的时候，其他段的数据也能被其他线程访问</p>
+<h2 id="1-1-7中的实现"><a href="#1-1-7中的实现" class="headerlink" title="1. 1.7中的实现"></a>1. 1.7中的实现</h2><p><img src="https://pic1.zhimg.com/v2-458d85ed1a2152458dd2a3b03360d340_b.jpg" alt="img"></p>
+<p>在1.7中是由 Segment 数组、HashEntry 组成，和 HashMap 一样，仍然是<strong>数组加链表</strong>。</p>
+<p>Segment 继承于 ReentrantLock(<strong>可重入锁</strong>)。理论上 ConcurrentHashMap 支持 CurrencyLevel (Segment 数组数量)的线程并发。</p>
+<p>HashEntry跟HashMap差不多的，但是不同点是，他使用<strong>volatile</strong>去修饰了他的数据Value还有下一个节点next。</p>
+<p>volatile：可见性，有序性，原子性</p>
+<h3 id="1-1-put操作"><a href="#1-1-put操作" class="headerlink" title="1.1 put操作"></a>1.1 put操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">final V put(K key, int hash, V value, boolean onlyIfAbsent) &#123;</span><br><span class="line">          &#x2F;&#x2F; 将当前 Segment 中的 table 通过 key 的 hashcode 定位到 HashEntry</span><br><span class="line">            HashEntry&lt;K,V&gt; node &#x3D; tryLock() ? null :</span><br><span class="line">                scanAndLockForPut(key, hash, value);</span><br><span class="line">            V oldValue;</span><br><span class="line">            try &#123;</span><br><span class="line">                HashEntry&lt;K,V&gt;[] tab &#x3D; table;</span><br><span class="line">                int index &#x3D; (tab.length - 1) &amp; hash;</span><br><span class="line">                HashEntry&lt;K,V&gt; first &#x3D; entryAt(tab, index);</span><br><span class="line">                for (HashEntry&lt;K,V&gt; e &#x3D; first;;) &#123;</span><br><span class="line">                    if (e !&#x3D; null) &#123;</span><br><span class="line">                        K k;</span><br><span class="line"> &#x2F;&#x2F; 遍历该 HashEntry，如果不为空则判断传入的 key 和当前遍历的 key 是否相等，相等则覆盖旧的 value。</span><br><span class="line">                        if ((k &#x3D; e.key) &#x3D;&#x3D; key ||</span><br><span class="line">                            (e.hash &#x3D;&#x3D; hash &amp;&amp; key.equals(k))) &#123;</span><br><span class="line">                            oldValue &#x3D; e.value;</span><br><span class="line">                            if (!onlyIfAbsent) &#123;</span><br><span class="line">                                e.value &#x3D; value;</span><br><span class="line">                                ++modCount;</span><br><span class="line">                            &#125;</span><br><span class="line">                            break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        e &#x3D; e.next;</span><br><span class="line">                    &#125;</span><br><span class="line">                    else &#123;</span><br><span class="line">                 &#x2F;&#x2F; 不为空则需要新建一个 HashEntry 并加入到 Segment 中，同时会先判断是否需要扩容。</span><br><span class="line">                        if (node !&#x3D; null)</span><br><span class="line">                            node.setNext(first);</span><br><span class="line">                        else</span><br><span class="line">                            node &#x3D; new HashEntry&lt;K,V&gt;(hash, key, value, first);</span><br><span class="line">                        int c &#x3D; count + 1;</span><br><span class="line">                        if (c &gt; threshold &amp;&amp; tab.length &lt; MAXIMUM_CAPACITY)</span><br><span class="line">                            rehash(node);</span><br><span class="line">                        else</span><br><span class="line">                            setEntryAt(tab, index, node);</span><br><span class="line">                        ++modCount;</span><br><span class="line">                        count &#x3D; c;</span><br><span class="line">                        oldValue &#x3D; null;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">               &#x2F;&#x2F;释放锁</span><br><span class="line">                unlock();</span><br><span class="line">            &#125;</span><br><span class="line">            return oldValue;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>先第一步的时候会尝试获取锁，如果获取失败肯定就有其他线程存在竞争，则利用 <code>scanAndLockForPut()</code> 自旋获取锁。</p>
+<ol>
+<li>尝试自旋获取锁。</li>
+<li>如果重试的次数达到了 <code>MAX_SCAN_RETRIES</code> 则改为阻塞锁获取，保证能获取成功。</li>
+</ol>
+<h3 id="1-2-get操作"><a href="#1-2-get操作" class="headerlink" title="1.2 get操作"></a>1.2 get操作</h3><p>get 逻辑比较简单，只需要将 Key 通过 Hash 之后定位到具体的 Segment ，再通过一次 Hash 定位到具体的元素上。</p>
+<p>由于 HashEntry 中的 value 属性是用 volatile 关键词修饰的，保证了内存可见性，所以每次获取时都是最新值。</p>
+<p>因为同样需要保证segment的分散性，所以segment也要为2的n次方</p>
+<h2 id="2-1-8中的实现"><a href="#2-1-8中的实现" class="headerlink" title="2.1.8中的实现"></a>2.1.8中的实现</h2><p>跟HashMap很像，也把之前的HashEntry改成了Node，但是作用不变，把值和next采用了volatile去修饰，保证了可见性，并且也引入了红黑树，在链表大于一定值的时候会转换（默认是8）。其中抛弃了原有的 Segment 分段锁，而采用了 <code>CAS + synchronized</code> 来保证并发安全性。</p>
+<h3 id="2-1-put操作"><a href="#2-1-put操作" class="headerlink" title="2.1 put操作"></a>2.1 put操作</h3><p>根据 key 计算出 hashcode 。</p>
+<p>判断是否需要进行初始化。</p>
+<p>即为当前 key 定位出的 Node，如果为空表示当前位置可以写入数据，利用 CAS 尝试写入，失败则自旋保证成功。</p>
+<p>如果当前位置的 <code>hashcode == MOVED == -1</code>,则需要进行扩容。</p>
+<p>如果都不满足，则利用 synchronized 锁写入数据。</p>
+<p>如果数量大于 <code>TREEIFY_THRESHOLD</code> 则要转换为红黑树。</p>
+<p>CAS —Compare and swap</p>
+<p>CAS 是乐观锁的一种实现方式，是一种轻量级锁，是一种乐观策略，认为并发操作并不总会发生。</p>
+<p>但是并不能保证绝对的并发安全，例如ABA问题(可以加时间戳或者版本号进行改进)</p>
+<h3 id="2-2-get操作"><a href="#2-2-get操作" class="headerlink" title="2.2 get操作"></a>2.2 get操作</h3><ul>
+<li>根据计算出来的 hashcode 寻址，如果就在桶上那么直接返回值。</li>
+<li>如果是红黑树那就按照树的方式获取值。</li>
+<li>就不满足那就按照链表的方式遍历获取值。</li>
+</ul>
 
       
     </div>
