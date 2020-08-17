@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="Synchronized实现原理Java中每个对象都可以作为锁，具体表现为三种形式 普通同步方法：锁当前实例对象 静态同步方法：锁当前类的class对象 同步方法块：锁括号里配置的对象 任意一个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，必须先获取该对象的监视器(monitor),而没有获取到监视器的线程将会阻塞到入口，进入BLOCKED状态 同步代码块是由monito">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Synchronized">
+<meta property="og:url" content="http://yoursite.com/2020/08/17/Synchronized/index.html">
+<meta property="og:site_name" content="BLOG">
+<meta property="og:description" content="Synchronized实现原理Java中每个对象都可以作为锁，具体表现为三种形式 普通同步方法：锁当前实例对象 静态同步方法：锁当前类的class对象 同步方法块：锁括号里配置的对象 任意一个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，必须先获取该对象的监视器(monitor),而没有获取到监视器的线程将会阻塞到入口，进入BLOCKED状态 同步代码块是由monito">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="d:/Blog/myblog/source/image/v2-2c3307ec81390376fcd396b7a8dcba02_b.jpg">
+<meta property="og:image" content="d:/Blog/myblog/source/image/v2-24afd64821ca168fb2707126bb1e0895_b.jpg">
+<meta property="og:image" content="d:/Blog/myblog/source/image/v2-40af85a5091f3647dfad9d0af94e9e08_b.jpg">
+<meta property="article:published_time" content="2020-08-17T08:44:54.000Z">
+<meta property="article:modified_time" content="2020-08-17T08:45:29.686Z">
+<meta property="article:author" content="Lucius Long">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/Blog/myblog/source/image/v2-2c3307ec81390376fcd396b7a8dcba02_b.jpg">
+
+
+<link rel="canonical" href="http://yoursite.com/2020/08/17/Synchronized/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Synchronized | BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">BLOG</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Discover the new world</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Synchronized"><span class="nav-number">1.</span> <span class="nav-text">Synchronized</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">存储位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E5%8D%87%E7%BA%A7"><span class="nav-number">1.3.</span> <span class="nav-text">锁升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.</span> <span class="nav-text">解决问题</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Lucius Long</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/Synchronized/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Synchronized
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-17 16:44:54 / Modified: 16:45:29" itemprop="dateCreated datePublished" datetime="2020-08-17T16:44:54+08:00">2020-08-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h1><h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>Java中每个对象都可以作为锁，具体表现为三种形式</p>
+<p>普通同步方法：锁当前实例对象</p>
+<p>静态同步方法：锁当前类的class对象</p>
+<p>同步方法块：锁括号里配置的对象</p>
+<p>任意一个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，必须先获取该对象的监视器(monitor),而没有获取到监视器的线程将会阻塞到入口，进入BLOCKED状态</p>
+<p>同步代码块是由monitorenter和monitorexit指令实现的</p>
+<p>同步方法是由ACC_Synchronized来完成的</p>
+<h2 id="存储位置"><a href="#存储位置" class="headerlink" title="存储位置"></a>存储位置</h2><p>在JVM中，对象分为三块区域：对象头，实例数据和对齐数据</p>
+<p><img src="D:\Blog\myblog\source\image\v2-2c3307ec81390376fcd396b7a8dcba02_b.jpg" alt="img"></p>
+<p>Synchronized用的锁是存在java对象头里的</p>
+<p>如果对象是数组类型，则用3个字宽，非数组类型用2个字宽</p>
+<p>分别是mark word(存储hashcode和锁信息)</p>
+<p>classmetadata address(存储到对象类型数据的指针)</p>
+<p>array length(数组的长度)</p>
+<p><img src="D:\Blog\myblog\source\image\v2-24afd64821ca168fb2707126bb1e0895_b.jpg" alt="img"></p>
+<h2 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h2><p><strong>无锁状态</strong></p>
+<p><strong>偏向锁状态</strong></p>
+<p>大多数情况下，不存在锁竞争，且线程总是由同一线程获得</p>
+<p>线程1锁定对象this，他发现对象为无锁状态，所以将线程id赋值给对象的Mark Word字段，表示对象为线程1专用，即使他退出了同步代码，其他线程也不能使用该对象。</p>
+<p><img src="D:\Blog\myblog\source\image\v2-40af85a5091f3647dfad9d0af94e9e08_b.jpg" alt="img"></p>
+<p>加锁和解锁不需要额外的消耗，和执行非同步方法相比只有纳秒级的差距。</p>
+<p><strong>轻量级锁状态</strong></p>
+<p>轻量级锁考虑的是竞争锁对象的线程不多，而且线程持有锁的时间也不长的情景。因为阻塞线程需要CPU从用户态转到内核态，代价较大，如果刚刚阻塞不久这个锁就被释放了，那这个代价就有点得不偿失了，因此这个时候就干脆不阻塞这个线程，让它自旋这等待锁释放。</p>
+<p>线程1获取轻量级锁时会先<strong>把锁对象的对象头MarkWord复制一份到线程1的栈帧中创建的用于存储锁记录的空间</strong>（称为DisplacedMarkWord），然后使<strong>用CAS把对象头中的内容替换为线程1存储的锁记录（DisplacedMarkWord）的地址；</strong></p>
+<p>如果在线程1复制对象头的同时（在线程1CAS之前），线程2也准备获取锁，复制了对象头到线程2的锁记录空间中，但是在线程2CAS的时候，发现线程1已经把对象头换了，<strong>线程2的CAS失败，那么线程2就尝试使用自旋锁来等待线程1释放锁。</strong> 自旋锁简单来说就是让线程2在循环中不断CAS</p>
+<p>但是如果自旋的时间太长也不行，因为自旋是要消耗CPU的，因此自旋的次数是有限制的，比如10次或者100次，<strong>如果自旋次数到了线程1还没有释放锁，或者线程1还在执行，线程2还在自旋等待，这时又有一个线程3过来竞争这个锁对象，那么这个时候轻量级锁就会膨胀为重量级锁。重量级锁把除了拥有锁的线程都阻塞，防止CPU空转。</strong></p>
+<p><strong>重量级锁</strong></p>
+<p>当自旋次数达到一定程度，为了避免消耗cpu，升级为重量级锁，线程竞争时，都会被阻塞住，当持有锁的线程释放锁之后，就会唤醒这些线程进行新一轮的锁竞争</p>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p><strong>1.可见性</strong></p>
+<p><strong>2.原子性</strong></p>
+<p>num++(4条指令 非原子性)</p>
+<p>获取静态变量的值</p>
+<p>数据入栈</p>
+<p>执行自增操作</p>
+<p>设置静态变量的值</p>
+<p><strong>3.有序性</strong></p>
+<p><strong>4.可见性</strong></p>
+<p>因为某一个线程进入synchronized代码块前后，线程会获得锁，清空工作内存，从主内存拷贝共享变量最新的值到工作内存成为副本，执行代码，将修改后的副本的值刷新回主内存中，线程释放锁。</p>
+<p>而获取不到锁的线程会阻塞等待，所以变量的值肯定一直都是最新的</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/17/Lock/" rel="prev" title="Lock">
+                  <i class="fa fa-chevron-left"></i> Lock
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/17/Volatile/" rel="next" title="Volatile">
+                  Volatile <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucius Long</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

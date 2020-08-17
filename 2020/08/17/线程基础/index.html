@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
   </script>
 
-  <meta name="description" content="1.vector、arraylist、linkedlist的区别和对比这三者都是实现集合框架中的 List，也就是所谓的有序集合，因此具体功能也比较近似，比如都提供按照位置进行定位、添加或者删除的操作，都提供迭代器以遍历其内容等。但因为具体的设计区别，在行为、性能、线程安全等方面，表现又有很大不同。 Vector 是 Java 早期提供的线程安全的动态数组，如果不需要线程安全，并不建议选择，毕竟同">
+  <meta name="description" content="线程基础定义现代操作系统中资源分配的最小单位是进程，系统调度的最小单位是线程，在一个进程里可以创建多个线程，线程拥有各自的计数器，栈和局部变量等属性，并且能够访问共享的内存变量。处理器在线程上根据时间片在这些线程上高速切换，让使用者能感受到这些线程在同时执行。 多线程能够利用更多的处理器核心，和能有更多的响应时间(对于一些非串行化的操作) 线程的状态初始状态：线程被构建，但是还没有调用start(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Arraylist和LinkedList的对比">
-<meta property="og:url" content="http://yoursite.com/2020/08/13/Arraylist%E5%92%8CLinkedlist/index.html">
+<meta property="og:title" content="线程基础">
+<meta property="og:url" content="http://yoursite.com/2020/08/17/%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="BLOG">
-<meta property="og:description" content="1.vector、arraylist、linkedlist的区别和对比这三者都是实现集合框架中的 List，也就是所谓的有序集合，因此具体功能也比较近似，比如都提供按照位置进行定位、添加或者删除的操作，都提供迭代器以遍历其内容等。但因为具体的设计区别，在行为、性能、线程安全等方面，表现又有很大不同。 Vector 是 Java 早期提供的线程安全的动态数组，如果不需要线程安全，并不建议选择，毕竟同">
+<meta property="og:description" content="线程基础定义现代操作系统中资源分配的最小单位是进程，系统调度的最小单位是线程，在一个进程里可以创建多个线程，线程拥有各自的计数器，栈和局部变量等属性，并且能够访问共享的内存变量。处理器在线程上根据时间片在这些线程上高速切换，让使用者能感受到这些线程在同时执行。 多线程能够利用更多的处理器核心，和能有更多的响应时间(对于一些非串行化的操作) 线程的状态初始状态：线程被构建，但是还没有调用start(">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-08-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-13T15:56:10.778Z">
+<meta property="article:published_time" content="2020-08-17T08:51:00.000Z">
+<meta property="article:modified_time" content="2020-08-17T08:51:13.918Z">
 <meta property="article:author" content="Lucius Long">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://yoursite.com/2020/08/13/Arraylist%E5%92%8CLinkedlist/">
+<link rel="canonical" href="http://yoursite.com/2020/08/17/%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/">
 
 
 <script class="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>Arraylist和LinkedList的对比 | BLOG</title>
+  <title>线程基础 | BLOG</title>
   
 
 
@@ -149,7 +149,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-vector%E3%80%81arraylist%E3%80%81linkedlist%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E5%AF%B9%E6%AF%94"><span class="nav-number">1.</span> <span class="nav-text">1.vector、arraylist、linkedlist的区别和对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%83%A8%E5%88%86"><span class="nav-number">2.</span> <span class="nav-text">2.线程安全部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8E%92%E5%BA%8F%E9%83%A8%E5%88%86"><span class="nav-number">3.</span> <span class="nav-text">3.排序部分</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">线程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">1.1.1.</span> <span class="nav-text">线程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">1.1.2.</span> <span class="nav-text">线程的优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%8F%97%E5%88%B0%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-number">1.2.</span> <span class="nav-text">线程并发受到的限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="nav-number">1.3.</span> <span class="nav-text">线程通信</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -199,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/Arraylist%E5%92%8CLinkedlist/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -215,7 +215,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Arraylist和LinkedList的对比
+          线程基础
         </h1>
 
         <div class="post-meta">
@@ -226,7 +226,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:56:10" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
+              <time title="Created: 2020-08-17 16:51:00 / Modified: 16:51:13" itemprop="dateCreated datePublished" datetime="2020-08-17T16:51:00+08:00">2020-08-17</time>
             </span>
 
           
@@ -238,19 +238,29 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="1-vector、arraylist、linkedlist的区别和对比"><a href="#1-vector、arraylist、linkedlist的区别和对比" class="headerlink" title="1.vector、arraylist、linkedlist的区别和对比"></a>1.vector、arraylist、linkedlist的区别和对比</h2><p>这三者都是实现集合框架中的 List，也就是所谓的有序集合，因此具体功能也比较近似，比如都提供按照位置进行定位、添加或者删除的操作，都提供迭代器以遍历其内容等。但因为具体的设计区别，在行为、性能、线程安全等方面，表现又有很大不同。</p>
-<p>Vector 是 Java 早期提供的线程安全的动态数组，如果不需要线程安全，并不建议选择，毕竟同步是有额外开销的。Vector 内部是使用对象数组来保存数据，可以根据需要自动的增加容量，当数组已满时，会创建新的数组，并拷贝原有数组数据。</p>
-<p>ArrayList 是应用更加广泛的动态数组实现，它本身不是线程安全的，所以性能要好很多。与 Vector 近似，ArrayList 也是可以根据需要调整容量，不过两者的调整逻辑有所区别，Vector 在扩容时会提高 1 倍，<strong>而 ArrayList 则是增加 50%（创建新数组，然后复制）</strong>。</p>
-<p>LinkedList 顾名思义是 Java 提供的双向链表，所以它不需要像上面两种那样调整容量，它也不是线程安全的。</p>
-<p>适用场景：</p>
-<p>Vector 和 ArrayList 作为动态数组，其内部元素以数组形式顺序存储的，所以非常适合<strong>随机访问</strong>的场合。除了尾部<strong>插入和删除</strong>元素，往往性能会相对较差，比如我们在中间位置插入一个元素，需要移动后续所有元素。</p>
-<p>而 LinkedList 进行节点<strong>插入、删除</strong>却要高效得多，但是随机访问性能则要比动态数组慢。</p>
-<h2 id="2-线程安全部分"><a href="#2-线程安全部分" class="headerlink" title="2.线程安全部分"></a>2.线程安全部分</h2><p>上述集合类都不是线程安全的，但是collection工具类中提供了方法实现线程安全</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List list &#x3D; Collections.synchronizedList(new ArrayList());</span><br></pre></td></tr></table></figure>
-
-<p>它的实现，基本就是将每个基本方法，比如 get、set、add 之类，都通过 synchronized 添加基本的同步支持，非常简单粗暴，但也非常实用。注意这些方法创建的线程安全集合，都符合迭代时 fail-fast 行为，当发生意外的并发修改时，尽早抛出 ConcurrentModificationException 异常，以避免不可预计的行为。</p>
-<h2 id="3-排序部分"><a href="#3-排序部分" class="headerlink" title="3.排序部分"></a>3.排序部分</h2><p>对于<strong>原始数据类型</strong>，目前使用的是所谓双轴快速排序（Dual-Pivot QuickSort），是一种改进的快速排序算法，早期版本是相对传统的快速排序，你可以阅读源码。</p>
-<p>而对于<strong>对象数据类型</strong>，目前则是使用TimSort，思想上也是一种归并和二分插入排序（binarySort）结合的优化排序算法。TimSort 并不是 Java 的独创，简单说它的思路是查找数据集中已经排好序的分区（这里叫 run），然后合并这些分区来达到排序的目的。</p>
+        <h1 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>现代操作系统中资源分配的最小单位是进程，系统调度的最小单位是线程，在一个进程里可以创建多个线程，线程拥有各自的计数器，栈和局部变量等属性，并且能够访问共享的内存变量。处理器在线程上根据时间片在这些线程上高速切换，让使用者能感受到这些线程在同时执行。</p>
+<p>多线程能够利用更多的处理器核心，和能有更多的响应时间(对于一些非串行化的操作)</p>
+<h3 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h3><p><strong>初始状态</strong>：线程被构建，但是还没有调用start()方法</p>
+<p><strong>运行状态</strong>：将操作系统中的就绪和运行两种状态概括为运行状态</p>
+<p><strong>阻塞状态</strong>：线程阻塞于锁</p>
+<p><strong>等待状态</strong>：线程进入等待状态，需要其他线程做出一些特定动作</p>
+<p><strong>超时等待状态</strong>：区别于等待状态，可以在特定的时间自行返回</p>
+<p><strong>终止状态</strong>：线程已经执行完毕</p>
+<h3 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h3><p>在java线程中，通过一个整型成员变量prioity来控制优先级，范围从1—10，对于频繁阻塞的线程需要设置高优先级</p>
+<h2 id="线程并发受到的限制"><a href="#线程并发受到的限制" class="headerlink" title="线程并发受到的限制"></a>线程并发受到的限制</h2><p><strong>上下文切换</strong></p>
+<p>解决方法：无锁并发编程(可以对数据进行hash分段，不同的线程处理不同段的数据，从而避免使用锁)</p>
+<p>CAS算法(乐观锁，减少锁的实际使用)</p>
+<p>协程(在单线程里实现多个任务的切换，避免上下文切换所带来的时间消耗)</p>
+<p><strong>死锁</strong>：多个进程因为资源的竞争，相互等待，无法推进的状态</p>
+<p>产生原因：资源的竞争，资源释放的不恰当</p>
+<p>必要条件：互斥 不剥夺 请求并保持 循环等待</p>
+<p>避免死锁的常见方法：</p>
+<p>避免一个线程获取多个锁，避免一个线程同时占用多个资源，尽量保证每个锁只占用一个资源</p>
+<p><strong>资源限制</strong></p>
+<p>硬件资源的限制</p>
+<h2 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h2><p>主要通过volatile和Synchronized</p>
+<p>volatile是轻量级锁，保证了修饰字段的可见性</p>
+<p>Synchronized可以通过修饰方法和同步块的形式进行使用，确保同一时刻，只能有一个线程处于方法或者同步块中，保证了线程对访问变量的可见性和排他性</p>
 
     </div>
 
@@ -264,14 +274,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/08/13/GC%E7%AE%97%E6%B3%95-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" rel="prev" title="GC算法和垃圾收集器">
-                  <i class="fa fa-chevron-left"></i> GC算法和垃圾收集器
+                <a href="/2020/08/17/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E9%80%9A%E4%BF%A1/" rel="prev" title="线程的生命周期和通信">
+                  <i class="fa fa-chevron-left"></i> 线程的生命周期和通信
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/08/17/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="next" title="秒杀系统架构">
-                  秒杀系统架构 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>

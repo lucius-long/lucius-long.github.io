@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -189,6 +189,644 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/17/%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">线程基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-17 16:51:00 / Modified: 16:51:13" itemprop="dateCreated datePublished" datetime="2020-08-17T16:51:00+08:00">2020-08-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>现代操作系统中资源分配的最小单位是进程，系统调度的最小单位是线程，在一个进程里可以创建多个线程，线程拥有各自的计数器，栈和局部变量等属性，并且能够访问共享的内存变量。处理器在线程上根据时间片在这些线程上高速切换，让使用者能感受到这些线程在同时执行。</p>
+<p>多线程能够利用更多的处理器核心，和能有更多的响应时间(对于一些非串行化的操作)</p>
+<h3 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h3><p><strong>初始状态</strong>：线程被构建，但是还没有调用start()方法</p>
+<p><strong>运行状态</strong>：将操作系统中的就绪和运行两种状态概括为运行状态</p>
+<p><strong>阻塞状态</strong>：线程阻塞于锁</p>
+<p><strong>等待状态</strong>：线程进入等待状态，需要其他线程做出一些特定动作</p>
+<p><strong>超时等待状态</strong>：区别于等待状态，可以在特定的时间自行返回</p>
+<p><strong>终止状态</strong>：线程已经执行完毕</p>
+<h3 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h3><p>在java线程中，通过一个整型成员变量prioity来控制优先级，范围从1—10，对于频繁阻塞的线程需要设置高优先级</p>
+<h2 id="线程并发受到的限制"><a href="#线程并发受到的限制" class="headerlink" title="线程并发受到的限制"></a>线程并发受到的限制</h2><p><strong>上下文切换</strong></p>
+<p>解决方法：无锁并发编程(可以对数据进行hash分段，不同的线程处理不同段的数据，从而避免使用锁)</p>
+<p>CAS算法(乐观锁，减少锁的实际使用)</p>
+<p>协程(在单线程里实现多个任务的切换，避免上下文切换所带来的时间消耗)</p>
+<p><strong>死锁</strong>：多个进程因为资源的竞争，相互等待，无法推进的状态</p>
+<p>产生原因：资源的竞争，资源释放的不恰当</p>
+<p>必要条件：互斥 不剥夺 请求并保持 循环等待</p>
+<p>避免死锁的常见方法：</p>
+<p>避免一个线程获取多个锁，避免一个线程同时占用多个资源，尽量保证每个锁只占用一个资源</p>
+<p><strong>资源限制</strong></p>
+<p>硬件资源的限制</p>
+<h2 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h2><p>主要通过volatile和Synchronized</p>
+<p>volatile是轻量级锁，保证了修饰字段的可见性</p>
+<p>Synchronized可以通过修饰方法和同步块的形式进行使用，确保同一时刻，只能有一个线程处于方法或者同步块中，保证了线程对访问变量的可见性和排他性</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E9%80%9A%E4%BF%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/17/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E9%80%9A%E4%BF%A1/" class="post-title-link" itemprop="url">线程的生命周期和通信</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-17 16:50:02 / Modified: 16:50:19" itemprop="dateCreated datePublished" datetime="2020-08-17T16:50:02+08:00">2020-08-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="线程的生命周期和通信"><a href="#线程的生命周期和通信" class="headerlink" title="线程的生命周期和通信"></a>线程的生命周期和通信</h1><h2 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h2><p>1、继承 Thread 类，然后调用 start() 方法。使用简单方便，但是由于Java规定类只能继承一个类，所以就无法继承其他类了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class ThreadTest extends Thread&#123;</span><br><span class="line">    &#x2F;&#x2F;重写run()方法，run()方法的方法体是线程执行体</span><br><span class="line">    public void run()&#123;</span><br><span class="line">        for(int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">            &#x2F;&#x2F;使用线程的getName()方法可以直接获取当前线程的名称</span><br><span class="line">            System.out.println(this.getName() + &quot;   &quot; + i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        &#x2F;&#x2F;输出Java程序运行时默认运行的主线程名称</span><br><span class="line">        System.out.println(Thread.currentThread().getName());</span><br><span class="line">        &#x2F;&#x2F;创建第一个线程并开始执行</span><br><span class="line">        new ThreadTest().start();</span><br><span class="line">        &#x2F;&#x2F;创建第二个线程并开始执行</span><br><span class="line">        new ThreadTest().start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、实现 Runnable 接口的run ()方法，然后再用 Thread 类包裹后，调用 start() 方法。因为类可以实现多个接口，因此扩展性更好，但是还需要再创建Thread对象，并调用start() 方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class ThreadTest implements Runnable&#123;</span><br><span class="line">    private int i;</span><br><span class="line">    &#x2F;&#x2F;重写run()方法，run()方法的方法体是线程执行体</span><br><span class="line">    public void run()&#123;</span><br><span class="line">        &#x2F;&#x2F;实现Runnable接口时，只能使用如下方法获取线程名</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + &quot;   &quot; + i);</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        ThreadTest tt &#x3D; new ThreadTest();</span><br><span class="line">        &#x2F;&#x2F;创建第一个线程并开始执行</span><br><span class="line">        &#x2F;&#x2F;输出   新线程1   0</span><br><span class="line">        new Thread(tt,&quot;新线程1&quot;).start();</span><br><span class="line">        &#x2F;&#x2F;创建第二个线程并开始执行</span><br><span class="line">        &#x2F;&#x2F;输出   新线程2   1</span><br><span class="line">        new Thread(tt,&quot;新线程2&quot;).start();</span><br><span class="line">        &#x2F;&#x2F;使用Lambda表达式创建Runnable对象</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、实现 Callable 接口的 call ()方法，用 FutureTask 类包裹 Callable 对象。然后再用 Thread 类包裹 FutureTask 类，并调用 start() 方法。操作较为繁琐，但是可以获取线程执行结束后的结果值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import java.util.concurrent.FutureTask;</span><br><span class="line"></span><br><span class="line">public class ThreadTest &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        &#x2F;&#x2F;使用FutureTask来包装Callable对象</span><br><span class="line">        &#x2F;&#x2F;使用Lambda表达式来创建Callable&lt;Integer&gt;对象</span><br><span class="line">        FutureTask&lt;Integer&gt; task &#x3D; new FutureTask&lt;&gt;(()-&gt;&#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + &quot;   &quot; + &quot;开始执行任务！&quot;);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;);</span><br><span class="line">        &#x2F;&#x2F;实质还是以Callable对象来创建并启动线程</span><br><span class="line">        &#x2F;&#x2F;输出 新线程   开始执行任务！</span><br><span class="line">        new Thread(task,&quot;新线程&quot;).start();</span><br><span class="line">        try&#123;</span><br><span class="line">            &#x2F;&#x2F;获取线程的返回值</span><br><span class="line">            &#x2F;&#x2F;输出 0</span><br><span class="line">            System.out.print(task.get());</span><br><span class="line">        &#125;catch (Exception ex)&#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    采用Runnable和Callable接口的方式创建多线程的优缺点：</p>
+<ul>
+<li>线程类只实现了Runnable接口或者Callable接口，还可以继承其他类。</li>
+<li>多个线程可以共享一个target对象，非常适合多个相同线程来处理同一份资源的情况，从而可以将CPU、代码和数据分开，形成清晰的模型，体现了面向对象的编程思想。</li>
+<li>编程稍微复杂些。</li>
+</ul>
+<p>​    采用继承Thread类的方式创建多线程的优缺点：</p>
+<ul>
+<li>线程类已经继承了Thread类，不能再继承其他类。</li>
+<li>编程比较简单。</li>
+</ul>
+<h2 id="启动和终止线程"><a href="#启动和终止线程" class="headerlink" title="启动和终止线程"></a>启动和终止线程</h2><p>随着start方法进行启动，随着run方法的执行完毕，线程也随之终止</p>
+<p>其他线程调用该线程的interrupt()方法对其进行中断操作，isInterrupted()来进行判断是否被中断</p>
+<p>可以通过cancel()对线程进行终止</p>
+<h2 id="线程的通信"><a href="#线程的通信" class="headerlink" title="线程的通信"></a>线程的通信</h2><h3 id="等待通知机制"><a href="#等待通知机制" class="headerlink" title="等待通知机制"></a>等待通知机制</h3><p>等待通知机制，是指一个线程A调用了对象O的wait()方法进入等待状态，而另一个线程B调用了对象O的notify()或notifyall()方法，线程a收到通知后从对象o的wait()方法返回，进而执行后续操作。</p>
+<p>notify()：通知一个线程，从wait方法返回，而返回的前提是该线程获取到了对象的锁</p>
+<p>notifyall()：通知所有线程</p>
+<p>wait()：线程进入waiting状态，并释放锁</p>
+<h3 id="Sleep和wait的区别"><a href="#Sleep和wait的区别" class="headerlink" title="Sleep和wait的区别"></a>Sleep和wait的区别</h3><p>1，所属的类不同：</p>
+<blockquote>
+<p>sleep方法是定义在Thread上<br>wait方法是定义在Object上</p>
+</blockquote>
+<p>2，对于锁资源的处理方式不同</p>
+<blockquote>
+<p>sleep不会释放锁<br>wait会释放锁</p>
+</blockquote>
+<p>3，使用范围：</p>
+<blockquote>
+<p>sleep可以使用在任何代码块<br>wait必须在同步方法或同步代码块执行</p>
+</blockquote>
+<p>4，后续操作</p>
+<blockquote>
+<p>sleep不需要被唤醒</p>
+<p>wait需要</p>
+</blockquote>
+<p>生命周期</p>
+<p>1，当线程调用wait()或者join时，线程都会进入到waiting状态，当调用notify或notifyAll时，或者join的线程执行结束后，会进入runnable状态</p>
+<p>2，当线程调用sleep(time)，或者wait(time)时，进入timed waiting状态，</p>
+<h3 id="thread-join"><a href="#thread-join" class="headerlink" title="thread.join"></a>thread.join</h3><p>若线程a执行了thread.join语句，则线程a等待thread线程终止后才从thread.join()返回</p>
+<h3 id="contdownlatch"><a href="#contdownlatch" class="headerlink" title="contdownlatch"></a>contdownlatch</h3><p>跟join方法效果一样，但是功能更多</p>
+<p>可以等待n个线程完成</p>
+<p>比如解析n个sheet的excel</p>
+<p>同时await方法避免某个线程处理较慢阻塞主线程</p>
+<h3 id="threadlocal"><a href="#threadlocal" class="headerlink" title="threadlocal"></a>threadlocal</h3><p>即线程变量，是一个以threadlocal对象为键，任意对象为值的存储结构。</p>
+<p>通过set方法设置值，get方法获取值</p>
+<p>ThreadLocal的作用主要是做数据隔离，填充的数据只属于当前线程，变量的数据对别的线程而言是相对隔离的，在多线程环境下，如何防止自己的变量被其它线程篡改。</p>
+<p>Spring采用Threadlocal的方式，来保证单个线程中的数据库操作使用的是同一个数据库连接，同时，采用这种方式可以使业务层使用事务时不需要感知并管理connection对象，通过传播级别，巧妙地管理多个事务配置之间的切换，挂起和恢复。</p>
+<h3 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h3><p>循环屏障</p>
+<p>一组线程会互相等待，直到所有线程都到达一个同步点。这个就非常有意思了，就像一群人被困到了一个栅栏前面，只有等最后一个人到达之后，他们才可以合力把栅栏（屏障）突破。</p>
+<p>CyclicBarrier 提供了两种构造方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public CyclicBarrier(int parties) &#123;</span><br><span class="line">    this(parties, null);</span><br><span class="line">&#125;</span><br><span class="line">public CyclicBarrier(int parties, Runnable barrierAction) &#123;</span><br><span class="line">    if (parties &lt;&#x3D; 0) throw new IllegalArgumentException();</span><br><span class="line">    this.parties &#x3D; parties;</span><br><span class="line">    this.count &#x3D; parties;</span><br><span class="line">    this.barrierCommand &#x3D; barrierAction;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个构造的参数，指的是需要几个线程一起到达，才可以使所有线程取消等待。第二个构造，额外指定了一个参数，用于在所有线程达到屏障时，优先执行 barrierAction。</p>
+<h3 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h3><p>信号量，用来控制同一时间，资源可被访问的线程数量，一般可用于流量的控制。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ol>
+<li>CountDownLatch 是一个线程等待其他线程， CyclicBarrier 是多个线程互相等待。</li>
+<li>CountDownLatch 的计数是减 1 直到 0，CyclicBarrier 是加 1，直到指定值。</li>
+<li>CountDownLatch 是一次性的， CyclicBarrier  可以循环利用。</li>
+<li>CyclicBarrier 可以在最后一个线程达到屏障之前，选择先执行一个操作。</li>
+<li>Semaphore ，需要拿到许可才能执行，并可以选择公平和非公平模式。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/17/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="post-title-link" itemprop="url">线程池</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-17 16:48:50 / Modified: 16:49:36" itemprop="dateCreated datePublished" datetime="2020-08-17T16:48:50+08:00">2020-08-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p><strong>线程池：</strong> 简单理解，它就是一个管理线程的池子。</p>
+<ul>
+<li><strong>它帮我们管理线程，避免增加创建线程和销毁线程的资源损耗</strong>。因为线程其实也是一个对象，创建一个对象，需要经过类加载过程，销毁一个对象，需要走GC垃圾回收流程，都是需要资源开销的。</li>
+<li><strong>提高响应速度。</strong> 如果任务到达了，相对于从线程池拿线程，重新去创建一条线程执行，速度肯定慢很多。</li>
+<li><strong>重复利用。</strong> 线程用完，再放回池子，可以达到重复利用的效果，节省资源。</li>
+</ul>
+<h2 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h2><p><img src="D:\Blog\myblog\source\image\v2-c23632eaad124bfa28de11c37e794736_b.jpg" alt="img"></p>
+<p><strong>corePoolSize：</strong> 线程池核心线程数最大值</p>
+<p><strong>maximumPoolSize：</strong> 线程池最大线程数大小</p>
+<p><strong>keepAliveTime：</strong> 线程池中非核心线程空闲的存活时间大小</p>
+<p><strong>unit：</strong> 线程空闲存活时间单位</p>
+<p><strong>workQueue：</strong> 存放任务的阻塞队列</p>
+<p><strong>threadFactory：</strong> 用于设置创建线程的工厂，可以给创建的线程设置有意义的名字，可方便排查问题。</p>
+<p><strong>handler：</strong> 线城池的饱和策略事件，主要有四种类型</p>
+<h2 id="线程池的使用"><a href="#线程池的使用" class="headerlink" title="线程池的使用"></a>线程池的使用</h2><p>线程池可以通过ThreadPoolExecutor来创建，我们来看一下它的构造函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize,long keepAliveTime,TimeUnit unit,</span><br><span class="line">   BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">   ThreadFactory threadFactory,</span><br><span class="line">   RejectedExecutionHandler handler)</span><br></pre></td></tr></table></figure>
+
+<p>线程池通过execute和submit提交任务，execute不需要返回值，submit需要返回值</p>
+<p>线程池通过shutdown和shutdownnow方法来关闭队列</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/Volatile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/17/Volatile/" class="post-title-link" itemprop="url">Volatile</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-17 16:45:58 / Modified: 16:48:24" itemprop="dateCreated datePublished" datetime="2020-08-17T16:45:58+08:00">2020-08-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h1><h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>如果一个字段被声明成volatile，Java线程线程内存模型确保所有线程看到的这个变量的值是一致的</p>
+<p>具体的实现原理</p>
+<p>lock前缀指令会引起处理器缓存回写到内存</p>
+<p>一个处理器的缓存回写到内存会导致其他处理器的内存无效(通过嗅探发现)</p>
+<p><strong>嗅探</strong>：</p>
+<p>每个处理器通过嗅探在总线上传播的数据来检查自己缓存的值是不是过期了，当处理器发现自己缓存行对应的内存地址被修改，就会将当前处理器的缓存行设置成无效状态，当处理器对这个数据进行修改操作的时候，会重新从系统内存中把数据读到处理器缓存里。</p>
+<p>由于Volatile的MESI缓存一致性协议，需要不断的从主内存嗅探和cas不断循环，无效交互会导致总线带宽达到峰值。</p>
+<p>所以不要大量使用Volatile，至于什么时候去使用Volatile什么时候使用锁，根据场景区分。</p>
+<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><h3 id="现代计算机内存模型"><a href="#现代计算机内存模型" class="headerlink" title="现代计算机内存模型"></a>现代计算机内存模型</h3><p>其实早期计算机中cpu和内存的速度是差不多的，但在现代计算机中，<code>cpu的指令速度远超内存的存取速度</code>，由于计算机的存储设备与处理器的运算速度有几个数量级的差距，所以现代计算机系统都不得不加入一层读写速度尽可能接近处理器运算速度的<code>高速缓存（Cache）</code>来作为内存与处理器之间的缓冲。</p>
+<p>将运算需要使用到的数据复制到缓存中，让运算能快速进行，当运算结束后再从缓存同步回内存之中，这样处理器就无须等待缓慢的内存读写了。</p>
+<p>基于高速缓存的存储交互很好地解决了处理器与内存的速度矛盾，但是也为计算机系统带来更高的复杂度，因为它引入了一个新的问题：<strong>缓存一致性（CacheCoherence）</strong></p>
+<p>在多处理器系统中，每个处理器都有自己的高速缓存，而它们又共享同一主内存（MainMemory）</p>
+<h3 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h3><p>Java内存模型，是java虚拟机规范中所定义的一种内存模型，Java内存模型是标准化的，屏蔽掉了底层不同计算机的区别</p>
+<p>Java内存模型(JavaMemoryModel)描述了Java程序中各种变量(线程共享变量)的访问规则，以及在JVM中将变量，存储到内存和从内存中读取变量这样的底层细节</p>
+<p>所有的共享变量都存储于主内存，这里所说的变量指的是实例变量和类变量，不包含局部变量，因为局部变量是线程私有的，因此不存在竞争问题。</p>
+<p>每一个线程还存在自己的工作内存，线程的工作内存，保留了被线程使用的变量的工作副本。</p>
+<p><strong>线程对变量的所有的操作(读，取)都必须在工作内存中完成，而不能直接读写主内存中的变量。</strong></p>
+<p>不同线程之间也不能直接访问对方工作内存中的变量，线程间变量的值的传递需要通过主内存中转来完成。</p>
+<p><img src="D:\Blog\myblog\source\image\v2-f0364f6f863d5730e2b962ac6b3387e2_720w.jpg" alt="v2-f0364f6f863d5730e2b962ac6b3387e2_720w"></p>
+<h2 id="指令重排序"><a href="#指令重排序" class="headerlink" title="指令重排序"></a>指令重排序</h2><p><strong>volatile保证不被执行重排序</strong></p>
+<p>为了提高性能，编译器和处理器常常会对既定的代码执行顺序进行指令重排序。</p>
+<p><img src="D:\Blog\myblog\source\image\指令重排序.jpg" alt="指令重排序"></p>
+<p>一般重排序可以分为如下三种：</p>
+<ul>
+<li>编译器优化的重排序。编译器在不改变单线程程序语义的前提下，可以重新安排语句的执行顺序;</li>
+<li>指令级并行的重排序。现代处理器采用了指令级并行技术来将多条指令重叠执行。如果不存在数据依赖性，处理器可以改变语句对应机器指令的执行顺序;</li>
+<li>内存系统的重排序。由于处理器使用缓存和读/写缓冲区，这使得加载和存储操作看上去可能是在乱序执行的。</li>
+</ul>
+<h3 id="as-if-serial"><a href="#as-if-serial" class="headerlink" title="as-if-serial"></a><strong>as-if-serial</strong></h3><p>不管怎么重排序，单线程下的执行结果不能被改变。</p>
+<p>编译器、runtime和处理器都必须遵守as-if-serial语义。</p>
+<h3 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a><strong>内存屏障</strong></h3><p><strong>volatile为了不被执行重排序，使用内存屏障</strong></p>
+<p>volatile写是在前面和后面<strong>分别插入内存屏障</strong>，而volatile读操作是在<strong>后面插入两个内存屏障</strong>。</p>
+<p><img src="D:\Blog\myblog\source\image\volatile-读.jpg" alt="volatile-读"></p>
+<p><img src="D:\Blog\myblog\source\image\volatile-写.jpg" alt="volatile-写"></p>
+<h2 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a><strong>happens-before</strong></h2><p>从JDK5开始，提出了<code>happens-before</code>的概念，通过这个概念来阐述操作之间的内存可见性</p>
+<h2 id="与Synchronized的区别"><a href="#与Synchronized的区别" class="headerlink" title="与Synchronized的区别"></a>与Synchronized的区别</h2><p>volatile只能修饰实例变量和类变量，而synchronized可以修饰方法，以及代码块。</p>
+<p>volatile保证数据的可见性，但是不保证原子性(多线程进行写操作，不保证线程安全);而synchronized是一种排他(互斥)的机制。 volatile用于禁止指令重排序：可以解决单例双重检查对象初始化代码执行乱序问题。</p>
+<p>volatile可以看做是轻量版的synchronized，volatile不保证原子性，但是如果是对一个共享变量进行多个线程的赋值，而没有其他的操作，那么就可以用volatile来代替synchronized，因为赋值本身是有原子性的，而volatile又保证了可见性，所以就可以保证线程安全了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/Synchronized/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/17/Synchronized/" class="post-title-link" itemprop="url">Synchronized</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-17 16:44:54 / Modified: 16:45:29" itemprop="dateCreated datePublished" datetime="2020-08-17T16:44:54+08:00">2020-08-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h1><h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>Java中每个对象都可以作为锁，具体表现为三种形式</p>
+<p>普通同步方法：锁当前实例对象</p>
+<p>静态同步方法：锁当前类的class对象</p>
+<p>同步方法块：锁括号里配置的对象</p>
+<p>任意一个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，必须先获取该对象的监视器(monitor),而没有获取到监视器的线程将会阻塞到入口，进入BLOCKED状态</p>
+<p>同步代码块是由monitorenter和monitorexit指令实现的</p>
+<p>同步方法是由ACC_Synchronized来完成的</p>
+<h2 id="存储位置"><a href="#存储位置" class="headerlink" title="存储位置"></a>存储位置</h2><p>在JVM中，对象分为三块区域：对象头，实例数据和对齐数据</p>
+<p><img src="D:\Blog\myblog\source\image\v2-2c3307ec81390376fcd396b7a8dcba02_b.jpg" alt="img"></p>
+<p>Synchronized用的锁是存在java对象头里的</p>
+<p>如果对象是数组类型，则用3个字宽，非数组类型用2个字宽</p>
+<p>分别是mark word(存储hashcode和锁信息)</p>
+<p>classmetadata address(存储到对象类型数据的指针)</p>
+<p>array length(数组的长度)</p>
+<p><img src="D:\Blog\myblog\source\image\v2-24afd64821ca168fb2707126bb1e0895_b.jpg" alt="img"></p>
+<h2 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h2><p><strong>无锁状态</strong></p>
+<p><strong>偏向锁状态</strong></p>
+<p>大多数情况下，不存在锁竞争，且线程总是由同一线程获得</p>
+<p>线程1锁定对象this，他发现对象为无锁状态，所以将线程id赋值给对象的Mark Word字段，表示对象为线程1专用，即使他退出了同步代码，其他线程也不能使用该对象。</p>
+<p><img src="D:\Blog\myblog\source\image\v2-40af85a5091f3647dfad9d0af94e9e08_b.jpg" alt="img"></p>
+<p>加锁和解锁不需要额外的消耗，和执行非同步方法相比只有纳秒级的差距。</p>
+<p><strong>轻量级锁状态</strong></p>
+<p>轻量级锁考虑的是竞争锁对象的线程不多，而且线程持有锁的时间也不长的情景。因为阻塞线程需要CPU从用户态转到内核态，代价较大，如果刚刚阻塞不久这个锁就被释放了，那这个代价就有点得不偿失了，因此这个时候就干脆不阻塞这个线程，让它自旋这等待锁释放。</p>
+<p>线程1获取轻量级锁时会先<strong>把锁对象的对象头MarkWord复制一份到线程1的栈帧中创建的用于存储锁记录的空间</strong>（称为DisplacedMarkWord），然后使<strong>用CAS把对象头中的内容替换为线程1存储的锁记录（DisplacedMarkWord）的地址；</strong></p>
+<p>如果在线程1复制对象头的同时（在线程1CAS之前），线程2也准备获取锁，复制了对象头到线程2的锁记录空间中，但是在线程2CAS的时候，发现线程1已经把对象头换了，<strong>线程2的CAS失败，那么线程2就尝试使用自旋锁来等待线程1释放锁。</strong> 自旋锁简单来说就是让线程2在循环中不断CAS</p>
+<p>但是如果自旋的时间太长也不行，因为自旋是要消耗CPU的，因此自旋的次数是有限制的，比如10次或者100次，<strong>如果自旋次数到了线程1还没有释放锁，或者线程1还在执行，线程2还在自旋等待，这时又有一个线程3过来竞争这个锁对象，那么这个时候轻量级锁就会膨胀为重量级锁。重量级锁把除了拥有锁的线程都阻塞，防止CPU空转。</strong></p>
+<p><strong>重量级锁</strong></p>
+<p>当自旋次数达到一定程度，为了避免消耗cpu，升级为重量级锁，线程竞争时，都会被阻塞住，当持有锁的线程释放锁之后，就会唤醒这些线程进行新一轮的锁竞争</p>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p><strong>1.可见性</strong></p>
+<p><strong>2.原子性</strong></p>
+<p>num++(4条指令 非原子性)</p>
+<p>获取静态变量的值</p>
+<p>数据入栈</p>
+<p>执行自增操作</p>
+<p>设置静态变量的值</p>
+<p><strong>3.有序性</strong></p>
+<p><strong>4.可见性</strong></p>
+<p>因为某一个线程进入synchronized代码块前后，线程会获得锁，清空工作内存，从主内存拷贝共享变量最新的值到工作内存成为副本，执行代码，将修改后的副本的值刷新回主内存中，线程释放锁。</p>
+<p>而获取不到锁的线程会阻塞等待，所以变量的值肯定一直都是最新的</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/Lock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/17/Lock/" class="post-title-link" itemprop="url">Lock</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-17 16:43:47 / Modified: 16:44:22" itemprop="dateCreated datePublished" datetime="2020-08-17T16:43:47+08:00">2020-08-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h1><h2 id="lock的定义与特性"><a href="#lock的定义与特性" class="headerlink" title="lock的定义与特性"></a>lock的定义与特性</h2><p>Lock接口在使用时需要显式的获取和释放锁，拥有了锁获取与释放的可操作性，<strong>可中断的获取锁以及超时获取锁</strong>等多种Synchronized关键字所不具备的同步特性</p>
+<p>对于许多场景(电商根据流量释放锁)有特别的效果</p>
+<p><img src="D:\Blog\myblog\source\image\v2-ddb71ab0b68d65ae70244bfdeb0d6704_b.jpg" alt="img"></p>
+<p>lock/unlock 获取和释放锁</p>
+<p><strong>主要特性</strong></p>
+<p>尝试<strong>非阻塞的获取锁</strong>(boolean trylock()):调用方法后立即返回true/false</p>
+<p><strong>能被中断的获取锁</strong>(void lockInterruptibly() throws InterruptedException):能够响应中断</p>
+<p><strong>超时获取锁</strong>(trylock(time,unit) throws InterruptedException))</p>
+<h2 id="Reentrantlock"><a href="#Reentrantlock" class="headerlink" title="Reentrantlock"></a>Reentrantlock</h2><p>reentrantlock重入锁，即支持重进入的锁，同时提供了一个构造函数，能够控制锁是否公平(即先请求一定先满足)</p>
+<h2 id="ReentrantReadWritelock"><a href="#ReentrantReadWritelock" class="headerlink" title="ReentrantReadWritelock"></a>ReentrantReadWritelock</h2><p>ReentrantReadWritelock读写锁，在同一时刻允许多个读线程访问，但是在写线程访问时，所有的读线程和其他的写线程都被堵塞</p>
+<p>读写锁维护了一个读锁和一个写锁，通过分离读锁和写锁，使得并发性相比一般的排他锁有了很大提升</p>
+<p><strong>特性</strong></p>
+<p>公平性选择</p>
+<p>重进入</p>
+<p>锁降级</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/17/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">秒杀系统架构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-17 16:38:49 / Modified: 16:43:16" itemprop="dateCreated datePublished" datetime="2020-08-17T16:38:49+08:00">2020-08-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="秒杀系统整体架构"><a href="#秒杀系统整体架构" class="headerlink" title="秒杀系统整体架构"></a>秒杀系统整体架构</h1><p>整体架构</p>
+<p><img src="D:\Blog\myblog\source\image\秒杀系统架构.jpg" alt="img"></p>
+<h2 id="需解决问题"><a href="#需解决问题" class="headerlink" title="需解决问题"></a>需解决问题</h2><h3 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h3><p>秒杀的特点是时间短，瞬间用户量大</p>
+<p>所以需要考虑的问题就有缓存雪崩，缓存击穿，缓存击透</p>
+<h3 id="超卖"><a href="#超卖" class="headerlink" title="超卖"></a>超卖</h3><p>避免库存扣减不一致</p>
+<h3 id="链接暴露"><a href="#链接暴露" class="headerlink" title="链接暴露"></a>链接暴露</h3><p>安全性问题，避免提前请求链接提前被获取</p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>所有请求直接打到数据库，容易打挂库</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>资源静态化：那就把能提前放入<strong>cdn服务器</strong>的东西都放进去，反正把所有能提升效率的步骤都做一下，减少真正秒杀时候服务器的压力。</p>
+<p>链接加盐：把<strong>URL动态化</strong>，就连写代码的人都不知道，你就通过MD5之类的摘要算法加密随机的字符串去做url，然后通过前端代码获取url后台校验才能通过。</p>
+<p>前端限流：这个很简单，一般秒杀不会让你一直点的，一般都是点击一下或者两下然后几秒之后才可以继续点击，这也是保护服务器的一种手段。</p>
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>使用多台服务器进行负载均衡</p>
+<h3 id="风控"><a href="#风控" class="headerlink" title="风控"></a>风控</h3><p>去除恶意账号和黄牛</p>
+<h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><p>微服务的思想：避免一个操作影响全局(高可用)</p>
+<p>库存预热：提前或定时把库存加载到redis里</p>
+<p>事务：比如redis的集群，为了保证查询的统一</p>
+<h3 id="消息队列-MQ"><a href="#消息队列-MQ" class="headerlink" title="消息队列(MQ)"></a>消息队列(MQ)</h3><p>把请求放进队列里，进行削峰削谷</p>
+<h3 id="数据库-1"><a href="#数据库-1" class="headerlink" title="数据库"></a>数据库</h3><p>索引</p>
+<p>分库</p>
+<h3 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h3><p>所以<strong>TCC</strong>和<strong>最终一致性</strong>其实不是很适合，TCC开发成本很大，所有接口都要写三次，因为涉及TCC的三个阶段。</p>
+<p>最终一致性基本上都是靠轮训的操作去保证一个操作一定成功，那时效性就大打折扣了。</p>
+<p>大家觉得不那么可靠的<strong>两段式（2PC）</strong>和<strong>三段式（3PC）</strong>就派上用场了，他们不一定能保证数据最终一致，但是效率上还算ok。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -265,122 +903,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/Hashmap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lucius Long">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BLOG">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/13/Hashmap/" class="post-title-link" itemprop="url">Hashmap</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:54:24" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Hashmap"><a href="#Hashmap" class="headerlink" title="Hashmap"></a>Hashmap</h1><h2 id="1-存储结构"><a href="#1-存储结构" class="headerlink" title="1.存储结构"></a>1.存储结构</h2><p>1.7为<strong>数组和链表组合构成</strong>的数据结构,1.8之后为<strong>数组加链表加红黑树</strong>(链表长度大于8转为红黑树)，数组里面每个地方都存了Key-Value这样的实例，在Java7叫Entry在Java8中叫Node。 HashMap最多只允许一条记录的键为null，允许多条记录的值为null，在put插入的时候会根据key的hash去计算一个index值。</p>
-<p><img src="https://pic4.zhimg.com/8db4a3bdfb238da1a1c4431d2b6e075c_b.png" alt="img"></p>
-<h2 id="2-字段"><a href="#2-字段" class="headerlink" title="2.字段"></a>2.字段</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int threshold;             &#x2F;&#x2F; 所能容纳的key-value对极限 </span><br><span class="line">final float loadFactor;    &#x2F;&#x2F; 负载因子</span><br><span class="line">int modCount;  </span><br><span class="line">int size;</span><br><span class="line">int length</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-Hash算法"><a href="#3-Hash算法" class="headerlink" title="3.Hash算法"></a>3.Hash算法</h2><p>Hash算法本质上分为三步</p>
-<p>1.求hashcode()</p>
-<p>2.高位运算</p>
-<p>3.取模运算(使元素分布更均匀)</p>
-<p>h&amp; (length-1)运算等价于对length取模，也就是h%length，但是&amp;比%具有更高的效率。</p>
-<h2 id="4-Put方法"><a href="#4-Put方法" class="headerlink" title="4.Put方法"></a>4.Put方法</h2><p>java8之前是<strong>头部插入</strong>，java8之后是<strong>尾部插入</strong>，在扩容时会保持链表元素原本的顺序，就不会出现链表成环的问题了</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/uChmeeX1FpwgWpRnXONPxeCYuBLK2tuNAkwVc0kP6ZoBcXubNg4BiaMbZlicQf7lFlwWgp79DDTNB9xOrY4oOUlg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/uChmeeX1FpwgWpRnXONPxeCYuBLK2tuNYwElHbLux4e7LXN8afWrRulD2h4l7fNxibM335vvDNhLtPxZiaWsP3EA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>put源码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"> 1 public V put(K key, V value) &#123;</span><br><span class="line"> 2     &#x2F;&#x2F; 对key的hashCode()做hash</span><br><span class="line"> 3     return putVal(hash(key), key, value, false, true);</span><br><span class="line"> 4 &#125;</span><br><span class="line"> 5 </span><br><span class="line"> 6 final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line"> 7                boolean evict) &#123;</span><br><span class="line"> 8     Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span><br><span class="line"> 9     &#x2F;&#x2F; 步骤①：tab为空则创建</span><br><span class="line">10     if ((tab &#x3D; table) &#x3D;&#x3D; null || (n &#x3D; tab.length) &#x3D;&#x3D; 0)</span><br><span class="line">11         n &#x3D; (tab &#x3D; resize()).length;</span><br><span class="line">12     &#x2F;&#x2F; 步骤②：计算index，并对null做处理 </span><br><span class="line">13     if ((p &#x3D; tab[i &#x3D; (n - 1) &amp; hash]) &#x3D;&#x3D; null) </span><br><span class="line">14         tab[i] &#x3D; newNode(hash, key, value, null);</span><br><span class="line">15     else &#123;</span><br><span class="line">16         Node&lt;K,V&gt; e; K k;</span><br><span class="line">17         &#x2F;&#x2F; 步骤③：节点key存在，直接覆盖value</span><br><span class="line">18         if (p.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">19             ((k &#x3D; p.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">20             e &#x3D; p;</span><br><span class="line">21         &#x2F;&#x2F; 步骤④：判断该链为红黑树</span><br><span class="line">22         else if (p instanceof TreeNode)</span><br><span class="line">23             e &#x3D; ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">24         &#x2F;&#x2F; 步骤⑤：该链为链表</span><br><span class="line">25         else &#123;</span><br><span class="line">26             for (int binCount &#x3D; 0; ; ++binCount) &#123;</span><br><span class="line">27                 if ((e &#x3D; p.next) &#x3D;&#x3D; null) &#123;</span><br><span class="line">28                     p.next &#x3D; newNode(hash, key,value,null);</span><br><span class="line">                        &#x2F;&#x2F;链表长度大于8转换为红黑树进行处理</span><br><span class="line">29                     if (binCount &gt;&#x3D; TREEIFY_THRESHOLD - 1) &#x2F;&#x2F; -1 for 1st  </span><br><span class="line">30                         treeifyBin(tab, hash);</span><br><span class="line">31                     break;</span><br><span class="line">32                 &#125;</span><br><span class="line">                    &#x2F;&#x2F; key已经存在直接覆盖value</span><br><span class="line">33                 if (e.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">34                     ((k &#x3D; e.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))                                          break;</span><br><span class="line">36                 p &#x3D; e;</span><br><span class="line">37             &#125;</span><br><span class="line">38         &#125;</span><br><span class="line">39         </span><br><span class="line">40         if (e !&#x3D; null) &#123; &#x2F;&#x2F; existing mapping for key</span><br><span class="line">41             V oldValue &#x3D; e.value;</span><br><span class="line">42             if (!onlyIfAbsent || oldValue &#x3D;&#x3D; null)</span><br><span class="line">43                 e.value &#x3D; value;</span><br><span class="line">44             afterNodeAccess(e);</span><br><span class="line">45             return oldValue;</span><br><span class="line">46         &#125;</span><br><span class="line">47     &#125;</span><br><span class="line"></span><br><span class="line">48     ++modCount;</span><br><span class="line">49     &#x2F;&#x2F; 步骤⑥：超过最大容量 就扩容</span><br><span class="line">50     if (++size &gt; threshold)</span><br><span class="line">51         resize();</span><br><span class="line">52     afterNodeInsertion(evict);</span><br><span class="line">53     return null;</span><br><span class="line">54 &#125;</span><br></pre></td></tr></table></figure>
-
-<p>步骤</p>
-<p>①.判断键值对数组table[i]是否为空或为null，否则执行resize()进行扩容；</p>
-<p>②.根据键值key计算hash值得到插入的数组索引i，如果table[i]==null，直接新建节点添加，转向⑥，如果table[i]不为空，转向③；</p>
-<p>③.判断table[i]的首个元素是否和key一样，如果相同直接覆盖value，否则转向④，这里的相同指的是hashCode以及equals；</p>
-<p>④.判断table[i] 是否为treeNode，即table[i] 是否是红黑树，如果是红黑树，则直接在树中插入键值对，否则转向⑤；</p>
-<p>⑤.遍历table[i]，判断链表长度是否大于8，大于8的话把链表转换为红黑树，在红黑树中执行插入操作，否则进行链表的插入操作；遍历过程中若发现key已经存在直接覆盖value即可；</p>
-<p>⑥.插入成功后，判断实际存在的键值对数量size是否超多了最大容量threshold，如果超过，进行扩容。</p>
-<h2 id="5-Resize"><a href="#5-Resize" class="headerlink" title="5.Resize"></a>5.Resize</h2><p>Resize条件</p>
-<ul>
-<li>Capacity：HashMap当前长度。</li>
-<li>LoadFactor：负载因子，默认值0.75f。</li>
-</ul>
-<p>当前容量达到capacity*loadfactor时，扩容</p>
-<p>扩容步骤</p>
-<ul>
-<li>扩容：创建一个新的Entry空数组，长度是原数组的2倍。(元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置)</li>
-<li>ReHash：遍历原Entry数组，把所有的Entry重新Hash到新数组。</li>
-</ul>
-<p>因此，我们在扩充HashMap的时候，不需要像JDK1.7的实现那样重新计算hash，只需要看看原来的hash值新增的那个bit是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+oldCap”，可以看看下图为16扩充为32的resize示意图</p>
-<p><img src="C:\Users\longy\Desktop\工作准备\图片文件\a285d9b2da279a18b052fe5eed69afe9_b.png" alt="img"></p>
-<h2 id="6-线程安全"><a href="#6-线程安全" class="headerlink" title="6.线程安全"></a>6.线程安全</h2><p>在并发情况下出现环形链表，next节点永远不为空，死循环获取entry</p>
-<p>所以使用Concurrenthashmap</p>
-<h2 id="7-重写equals方法的时候需要重写hashCode方法呢？"><a href="#7-重写equals方法的时候需要重写hashCode方法呢？" class="headerlink" title="7.重写equals方法的时候需要重写hashCode方法呢？"></a>7.重写equals方法的时候需要重写hashCode方法呢？</h2><p>在java中，所有的对象都是继承于Object类。Ojbect类中有两个方法equals、hashCode，这两个方法都是用来比较两个对象是否相等的。</p>
-<p>当我们将equals方法重写后有必要将hashCode方法也重写，这样做才能保证不违背hashCode方法中“<strong>相同对象必须有相同哈希值</strong>”的约定</p>
-<p>在未重写equals方法我们是继承了object的equals方法，<strong>那里的 equals是比较两个对象的内存地址</strong>，显然我们new了2个对象内存地址肯定不一样</p>
-<ul>
-<li>对于值对象，==比较的是两个对象的值</li>
-<li>对于引用对象，比较的是两个对象的地址</li>
-</ul>
-<p>所以如果我们对equals方法进行了重写，建议一定要对hashCode方法重写，以保证相同的对象返回相同的hash值，不同的对象返回不同的hash值。</p>
-<p>不然一个链表的对象，你哪里知道你要找的是哪个，到时候发现hashCode都一样</p>
-<h2 id="8-和hashtable的比较"><a href="#8-和hashtable的比较" class="headerlink" title="8.和hashtable的比较"></a>8.和hashtable的比较</h2><p>1.线程是否安全(hashtable 对数据操作时都会上锁)</p>
-<p>2.是否为null(hashtable 不允许 hashmap允许)</p>
-<p>3.扩容机制不同(hashtable+1 hashmap*2)</p>
-<p>4.迭代器不同 HashMap 中的 Iterator 迭代器是 <strong>fail-fast</strong> 的，而 Hashtable 的 Enumerator 不是 <strong>fail-fast</strong> 的</p>
-<p><strong>fail-fast</strong></p>
-<p>是java集合中的一种机制， 在用迭代器遍历一个集合对象时，如果遍历过程中对集合对象的内容进行了修改（增加、删除、修改），则会抛出Concurrent Modification Exception。</p>
-<p>迭代器在遍历时直接访问集合中的内容，并且在遍历过程中使用一个 modCount 变量。</p>
-<p>集合在被遍历期间如果内容发生变化，就会改变modCount的值。</p>
-<p>每当迭代器使用hashNext()/next()遍历下一个元素之前，都会检测modCount变量是否为expectedmodCount值，是的话就返回遍历；否则抛出异常，终止遍历。</p>
-<p><strong>Tip</strong>：这里异常的抛出条件是检测到 modCount！=expectedmodCount 这个条件。如果集合发生变化时修改modCount值刚好又设置为了expectedmodCount值，则异常不会抛出。</p>
-<p>因此，不能依赖于这个异常是否抛出而进行并发操作的编程，这个异常只建议用于检测并发修改的bug。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/GC%E7%AE%97%E6%B3%95-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -407,10 +929,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:53:50" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
+              <time title="Created: 2020-08-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-17 16:31:40" itemprop="dateModified" datetime="2020-08-17T16:31:40+08:00">2020-08-17</time>
+              </span>
 
           
 
@@ -431,13 +959,13 @@
 </ul>
 <h2 id="2-垃圾收集算法"><a href="#2-垃圾收集算法" class="headerlink" title="2.垃圾收集算法"></a>2.垃圾收集算法</h2><h4 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记 -清除算法"></a>标记 -清除算法</h4><p>“标记-清除”（Mark-Sweep）算法，如它的名字一样，算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收掉所有被标记的对象。之所以说它是最基础的收集算法，是因为后续的收集算法都是基于这种思路并对其缺点进行改进而得到的。</p>
 <p>它的主要缺点有两个：一个是效率问题，标记和清除过程的效率都不高；另外一个是空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致，当程序在以后的运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorBnVw0K7iaaPwhicLhrpb8nibkgia2lkHzovEgPo2VC23QTr8EMpiaPxuFGw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="D:\Blog\myblog\source\image\标记清除算法.jpg" alt="标记清除算法"></p>
 <h4 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h4><p>“复制”（Copying）的收集算法，它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。</p>
 <p>这样使得每次都是对其中的一块进行内存回收，内存分配时也就不用考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。只是这种算法的代价是将内存缩小为原来的一半，持续复制长生存期的对象则导致效率降低。</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorcDwjZkYkrJ4fpgTibYjMEDGVK81YIQWDpW0k1S9ibjxLvRz3848v91qg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="D:\Blog\myblog\source\image\复制算法.jpg" alt="复制算法"></p>
 <h4 id="标记-压缩算法"><a href="#标记-压缩算法" class="headerlink" title="标记-压缩算法"></a>标记-压缩算法</h4><p>复制收集算法在对象存活率较高时就要执行较多的复制操作，效率将会变低。更关键的是，如果不想浪费50%的空间，就需要有额外的空间进行分配担保，以应对被使用的内存中所有对象都100%存活的极端情况，所以在老年代一般不能直接选用这种算法。</p>
 <p>根据老年代的特点，有人提出了另外一种“标记-整理”（Mark-Compact）算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnqLYgY6g5DgUKYUPgXXTjorH0wLYIx1oZ7fGo2uNUgB6dwGLYV3h7pJtMgficMpicMOhUENpStgSCog/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="D:\Blog\myblog\source\image\标记整理算法.png" alt="标记整理算法"></p>
 <h2 id="3-垃圾收集器"><a href="#3-垃圾收集器" class="headerlink" title="3.垃圾收集器"></a>3.垃圾收集器</h2><h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p>CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。目前很大一部分的Java应用都集中在互联网站或B/S系统的服务端上，这类应用尤其重视服务的响应速度，希望系统停顿时间最短，以给用户带来较好的体验。</p>
 <p>从名字（包含“Mark Sweep”）上就可以看出CMS收集器是基于“标记-清除”算法实现的，它的运作过程相对于前面几种收集器来说要更复杂一些，整个过程分为4个步骤，包括：</p>
 <ul>
@@ -486,7 +1014,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/Hashmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -503,277 +1031,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/13/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">JVM内存结构</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:54:58" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnoUSbbnzEiafyyQWUibOfnE3GicpdRQOuxWBrhB3Fic7MRf4z5ywT2RmCicibGibHNQEgUbsibLR1eLVRfo3A/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>JVM内存结构主要有三大块：<strong>堆内存</strong>、<strong>方法区</strong>和<strong>栈</strong>。堆内存是JVM中最大的一块由年轻代和老年代组成，而年轻代内存又被分成三部分，<strong>Eden空间</strong>、<strong>From Survivor空间</strong>、<strong>To Survivor空间</strong>,默认情况下年轻代按照<strong>8:1:1</strong>的比例来分配；</p>
-<p><strong>方法区存储类信息、常量、静态变量等数据，是线程共享的区域</strong>，为与Java堆区分，方法区还有一个别名Non-Heap(非堆)；栈又分为java虚拟机栈和本地方法栈主要用于方法的执行。</p>
-<p>控制参数</p>
-<ul>
-<li>-Xms设置堆的最小空间大小。</li>
-<li>-Xmx设置堆的最大空间大小。</li>
-<li>-XX:NewSize设置新生代最小空间大小。</li>
-<li>-XX:MaxNewSize设置新生代最大空间大小。</li>
-<li>-XX:PermSize设置永久代最小空间大小。</li>
-<li>-XX:MaxPermSize设置永久代最大空间大小。</li>
-<li>-Xss设置每个线程的堆栈大小</li>
-</ul>
-<h2 id="2-详细分析"><a href="#2-详细分析" class="headerlink" title="2.详细分析"></a>2.详细分析</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnoUSbbnzEiafyyQWUibOfnE3G1sZG1aJZSakhFe5d6QeiciaO9ZIDfHrFS9UZx8RfWfkPk9UZLCVdcriaQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>方法区和对是所有线程共享的内存区域；而java栈、本地方法栈和程序员计数器是运行是线程私有的内存区域。</p>
-<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>对于大多数应用来说，Java堆（Java Heap）是Java虚拟机所管理的内存中<strong>最大</strong>的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放<strong>对象实例</strong>，<strong>几乎所有的对象实例都在这里分配内存</strong>。</p>
-<p>Java堆是垃圾收集器管理的主要区域，因此很多时候也被称做“<strong>GC堆</strong>”。如果从内存回收的角度看，由于现在收集器基本都是采用的分代收集算法，所以Java堆中还可以细分为：<strong>新生代和老年代；再细致一点的有Eden空间、From Survivor空间、To Survivor空间等。</strong></p>
-<p>根据Java虚拟机规范的规定，Java堆可以处于物理上不连续的内存空间中，只要逻辑上是连续的即可，就像我们的磁盘空间一样。在实现时，既可以实现成固定大小的，也可以是可扩展的，不过当前主流的虚拟机都是按照可扩展来实现的（通过-Xmx和-Xms控制）。</p>
-<p><strong>如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError异常。</strong></p>
-<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，<strong>它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</strong>虽然Java虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫做Non-Heap（非堆），目的应该是与Java堆区分开来。</p>
-<p>对于习惯在HotSpot虚拟机上开发和部署程序的开发者来说，很多人愿意把方法区称为“永久代”（Permanent Generation），本质上两者并不等价，仅仅是因为HotSpot虚拟机的设计团队选择把GC分代收集扩展至方法区，或者说使用永久代来实现方法区而已。</p>
-<p>Java虚拟机规范对这个区域的限制非常宽松，除了和Java堆一样不需要连续的内存和可以选择固定大小或者可扩展外，还可以选择不实现垃圾收集。相对而言，垃圾收集行为在这个区域是比较少出现的，但并非数据进入了方法区就如永久代的名字一样“永久”存在了。这个区域的内存回收目标主要是针对常量池的回收和对类型的卸载，一般来说这个区域的回收“成绩”比较难以令人满意，尤其是类型的卸载，条件相当苛刻，但是这部分区域的回收确实是有必要的。</p>
-<p>根据Java虚拟机规范的规定，<strong>当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</strong></p>
-<p><strong>通过JConsole工具可以查看运行中的Java程序（比如Eclipse）的一些信息：堆内存的分配，线程的数量以及加载的类的个数；</strong></p>
-<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器（Program Counter Register）是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里（仅是概念模型，各种虚拟机可能会通过一些更高效的方式去实现），字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p>
-<p>由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）只会执行一条线程中的指令。因此，为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各条线程之间的计数器互不影响，独立存储，我们称这类内存区域为“线程私有”的内存。</p>
-<p>如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是Natvie方法，这个计数器值则为空（Undefined）。</p>
-<p><strong>此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</strong></p>
-<h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><p>与程序计数器一样，Java虚拟机栈（Java Virtual Machine Stacks）也是线程私有的，<strong>它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：</strong>每个方法被执行的时候都会同时创建一个<strong>栈帧（Stack Frame</strong>）用于存储<strong>局部变量表、操作栈、动态链接、方法出口</strong>等信息。<strong>每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</strong></p>
-<p><strong>局部变量表存放了编译期可知的各种基本数据类型</strong>（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，它不等同于对象本身，根据不同的虚拟机实现，它可能是一个指向对象起始地址的引用指针，也可能指向一个代表对象的句柄或者其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。</p>
-<p>其中64位长度的long和double类型的数据会占用2个局部变量空间（Slot），其余的数据类型只占用1个。局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法需要在帧中分配多大的局部变量空间是完全确定的，在方法运行期间不会改变局部变量表的大小。</p>
-<p>在Java虚拟机规范中，对这个区域规定了两种异常状况：<strong>如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常</strong>；<strong>如果虚拟机栈可以动态扩展（当前大部分的Java虚拟机都可动态扩展，只不过Java虚拟机规范中也允许固定长度的虚拟机栈），当扩展时无法申请到足够的内存时会抛出OutOfMemoryError异常</strong>。</p>
-<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而<strong>本地方法栈则是为虚拟机使用到的Native方法服务。</strong>虚拟机规范中对本地方法栈中的方法使用的语言、使用方式与数据结构并没有强制规定，因此具体的虚拟机可以自由实现它。甚至有的虚拟机（譬如Sun HotSpot虚拟机）直接就把本地方法栈和虚拟机栈合二为一。与虚拟机栈一样，<strong>本地方法栈区域也会抛出StackOverflowError和OutOfMemoryError异常</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lucius Long">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BLOG">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/13/%E9%9B%86%E5%90%88%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">集合整体框架</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:55:36" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="集合整体框架"><a href="#集合整体框架" class="headerlink" title="集合整体框架"></a>集合整体框架</h1><p><img src="C:\Users\longy\Desktop\工作准备\图片文件\集合框架.jpg" alt="img"></p>
-<p>所有集合类都位于<code>java.util</code>包下。Java的集合类主要由两个接口派生而出：Collection和Map，Collection和Map是Java集合框架的根接口，这两个接口又包含了一些子接口或实现类</p>
-<h2 id="1-collection部分"><a href="#1-collection部分" class="headerlink" title="1.collection部分"></a>1.collection部分</h2><p>扩展开提供了三大类集合，分别是：</p>
-<p><strong>List</strong></p>
-<p>List，也就是我们前面介绍最多的有序集合，它提供了方便的访问、插入、删除等操作。</p>
-<p>几个主要实现包括<strong>Linkedlist，ArrayList</strong></p>
-<p><strong>Set</strong></p>
-<p>Set 是不允许重复元素的，这是和 List 最明显的区别，也就是不存在两个对象 equals 返回 true。我们在日常开发中有很多需要保证元素唯一性的场合。</p>
-<p>以 Set 的几个实现为例：</p>
-<p><strong>TreeSet</strong> 支持自然顺序访问，但是添加、删除、包含等操作要相对低效（log(n) 时间）。</p>
-<p><strong>HashSet</strong> 则是利用哈希算法，理想情况下，如果哈希散列正常，可以提供常数时间的添加、删除、包含等操作，但是它不保证有序。</p>
-<p><strong>LinkedHashSet</strong>，内部构建了一个记录插入顺序的双向链表，因此提供了按照插入顺序遍历的能力，与此同时，也保证了常数时间的添加、删除、包含等操作，这些操作性能略低于 HashSet，因为需要维护链表的开销。在遍历元素时，HashSet 性能受自身容量影响，所以初始化时，除非有必要，不然不要将其背后的 HashMap 容量设置过大。而对于 LinkedHashSet，由于其内部链表提供的方便，遍历性能只和元素多少有关系。</p>
-<p><strong>Queue/Deque</strong></p>
-<p>则是 Java 提供的标准队列结构的实现，除了集合的基本功能，它还支持类似先入先出（FIFO， First-in-First-Out）或者后入先出（LIFO，Last-In-First-Out）等特定行为。这里不包括 BlockingQueue，因为通常是并发编程场合，所以被放置在并发包里。</p>
-<h2 id="2-Map部分"><a href="#2-Map部分" class="headerlink" title="2.Map部分"></a>2.Map部分</h2><p>Hashtable、HashMap、TreeMap 都是最常见的一些 Map 实现，是以键值对的形式存储和操作数据的容器类型。</p>
-<p><strong>Hashtable</strong> 是早期 Java 类库提供的一个哈希表实现，本身是同步的，不支持 null 键和值，由于<strong>同步导致的性能开销</strong>，所以已经很少被推荐使用。</p>
-<p><strong>HashMap</strong> 是应用更加广泛的哈希表实现，行为上大致上与 HashTable 一致，主要区别在于 HashMap 不是同步的，支持 null 键和值等。通常情况下，HashMap 进行 put 或者 get 操作，可以达到常数时间的性能，所以它是绝大部分利用键值对存取场景的首选，比如，实现一个用户 ID 和用户信息对应的运行时存储结构。</p>
-<p><strong>TreeMap</strong> 则是基于红黑树的一种提供<strong>顺序访问</strong>的 Map，和 HashMap 不同，它的 get、put、remove 之类操作都是 O（log(n)）的时间复杂度，具体顺序可以由指定的 Comparator 来决定，或者根据键的自然顺序来判断。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lucius Long">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BLOG">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/13/%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">类的加载机制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-08-13 00:00:00 / Modified: 23:56:04" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="类的加载机制"><a href="#类的加载机制" class="headerlink" title="类的加载机制"></a>类的加载机制</h1><h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h2><p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个 <code>java.lang.Class</code>对象，用来封装类在方法区内的数据结构。类的加载的最终产品是位于堆区中的 <code>Class</code>对象， <code>Class</code>对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
-<p><strong>加载.class文件的方式</strong></p>
-<ul>
-<li>从本地系统中直接加载</li>
-<li>通过网络下载.class文件</li>
-<li>从zip，jar等归档文件中加载.class文件</li>
-<li>从专有数据库中提取.class文件</li>
-<li>将Java源文件动态编译为.class文件</li>
-</ul>
-<h2 id="2-类的生命周期"><a href="#2-类的生命周期" class="headerlink" title="2.类的生命周期"></a>2.类的生命周期</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnokxXiapDdvntH8PGwa0zGXMyIBnM38m8eKia8wAVY8aXb0NhM9wFNDLVuoFKIZ0Q2SBk5yibFgXsXOw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>其中类加载的过程包括了<strong>加载、验证、准备、解析、初始化</strong>五个阶段</p>
-<p>(后续补充)</p>
-<h2 id="3-类加载器"><a href="#3-类加载器" class="headerlink" title="3.类加载器"></a>3.类加载器</h2><p><img src="http://mmbiz.qpic.cn/mmbiz_png/PgqYrEEtEnokxXiapDdvntH8PGwa0zGXM7qXKib1ibsib1BuyLxjoP1sgorwib78yTD4896N5r1AibdhDXTHZ7z9VyBg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p>站在Java开发人员的角度来看，类加载器可以大致划分为以下三类：</p>
-<p><strong>启动类加载器</strong>： <code>BootstrapClassLoader</code>，负责加载存放在 <code>JDK\jre\lib</code>(JDK代表JDK的安装目录，下同)下，或被 <code>-Xbootclasspath</code>参数指定的路径中的，并且能被虚拟机识别的类库（如rt.jar，所有的java.开头的类均被 <code>BootstrapClassLoader</code>加载）。启动类加载器是无法被Java程序直接引用的。<br><strong>扩展类加载器</strong>： <code>ExtensionClassLoader</code>，该加载器由 <code>sun.misc.Launcher$ExtClassLoader</code>实现，它负责加载 <code>JDK\jre\lib\ext</code>目录中，或者由 <code>java.ext.dirs</code>系统变量指定的路径中的所有类库（如javax.开头的类），开发者可以直接使用扩展类加载器。<br><strong>应用程序类加载器</strong>： <code>ApplicationClassLoader</code>，该类加载器由 <code>sun.misc.Launcher$AppClassLoader</code>来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</p>
-<p><strong>自定义加载器</strong></p>
-<p><strong>JVM类加载机制</strong></p>
-<ul>
-<li><strong>全盘负责</strong>，当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入</li>
-<li><strong>父类委托</strong>，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类</li>
-<li><strong>缓存机制</strong>，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效</li>
-</ul>
-<h2 id="4-类的加载"><a href="#4-类的加载" class="headerlink" title="4.类的加载"></a>4.类的加载</h2><p>类加载有三种方式：</p>
-<ul>
-<li>1、命令行启动应用时候由JVM初始化加载</li>
-<li>2、通过Class.forName()方法动态加载</li>
-<li>3、通过ClassLoader.loadClass()方法动态加载</li>
-</ul>
-<p><strong>Class.forName()和ClassLoader.loadClass()区别</strong></p>
-<ul>
-<li><code>Class.forName()</code>：将类的.class文件加载到jvm中之外，还会对类进行解释，执行类中的static块；</li>
-<li><code>ClassLoader.loadClass()</code>：只干一件事情，就是将.class文件加载到jvm中，不会执行static中的内容,只有在newInstance才会去执行static块。</li>
-<li><code>Class.forName(name,initialize,loader)</code>带参函数也可控制是否加载static块。并且只有调用了newInstance()方法采用调用构造函数，创建类的对象 。</li>
-</ul>
-<h2 id="5-双亲委派模型"><a href="#5-双亲委派模型" class="headerlink" title="5.双亲委派模型"></a>5.双亲委派模型</h2><p>双亲委派模型的工作流程是：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。</p>
-<p>双亲委派机制:</p>
-<ul>
-<li>1、当 <code>AppClassLoader</code>加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器<code>ExtClassLoader</code>去完成。</li>
-<li>2、当 <code>ExtClassLoader</code>加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader```去完成。</li>
-<li>3、如果 <code>BootStrapClassLoader</code>加载失败（例如在 <code>$JAVA_HOME/jre/lib</code>里未查找到该class），会使用 <code>ExtClassLoader</code>来尝试加载；</li>
-<li>4、若ExtClassLoader也加载失败，则会使用 <code>AppClassLoader</code>来加载，如果 <code>AppClassLoader</code>也加载失败，则会报出异常 <code>ClassNotFoundException</code>。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/12/Concurrenthashmap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lucius Long">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BLOG">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/Concurrenthashmap/" class="post-title-link" itemprop="url">Concurrenthashmap</a>
+            <a href="/2020/08/13/Hashmap/" class="post-title-link" itemprop="url">Hashmap</a>
         </h2>
 
         <div class="post-meta">
@@ -783,14 +1041,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-08-12 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-12T00:00:00+08:00">2020-08-12</time>
+              <time title="Created: 2020-08-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-13T00:00:00+08:00">2020-08-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 23:52:59" itemprop="dateModified" datetime="2020-08-13T23:52:59+08:00">2020-08-13</time>
+                <time title="Modified: 2020-08-17 16:33:01" itemprop="dateModified" datetime="2020-08-17T16:33:01+08:00">2020-08-17</time>
               </span>
 
           
@@ -802,38 +1060,63 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Concurrenthashmap-1-7-1-8的区别"><a href="#Concurrenthashmap-1-7-1-8的区别" class="headerlink" title="Concurrenthashmap(1.7/1.8的区别)"></a>Concurrenthashmap(1.7/1.8的区别)</h1><p>并发效率高的原因</p>
-<p>锁分段技术：首先将数据分成一段一段的存储，每一段配一把锁，当一个线程占用锁访问其中一个数据段的时候，其他段的数据也能被其他线程访问</p>
-<h2 id="1-1-7中的实现"><a href="#1-1-7中的实现" class="headerlink" title="1. 1.7中的实现"></a>1. 1.7中的实现</h2><p><img src="https://pic1.zhimg.com/v2-458d85ed1a2152458dd2a3b03360d340_b.jpg" alt="img"></p>
-<p>在1.7中是由 Segment 数组、HashEntry 组成，和 HashMap 一样，仍然是<strong>数组加链表</strong>。</p>
-<p>Segment 继承于 ReentrantLock(<strong>可重入锁</strong>)。理论上 ConcurrentHashMap 支持 CurrencyLevel (Segment 数组数量)的线程并发。</p>
-<p>HashEntry跟HashMap差不多的，但是不同点是，他使用<strong>volatile</strong>去修饰了他的数据Value还有下一个节点next。</p>
-<p>volatile：可见性，有序性，原子性</p>
-<h3 id="1-1-put操作"><a href="#1-1-put操作" class="headerlink" title="1.1 put操作"></a>1.1 put操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">final V put(K key, int hash, V value, boolean onlyIfAbsent) &#123;</span><br><span class="line">          &#x2F;&#x2F; 将当前 Segment 中的 table 通过 key 的 hashcode 定位到 HashEntry</span><br><span class="line">            HashEntry&lt;K,V&gt; node &#x3D; tryLock() ? null :</span><br><span class="line">                scanAndLockForPut(key, hash, value);</span><br><span class="line">            V oldValue;</span><br><span class="line">            try &#123;</span><br><span class="line">                HashEntry&lt;K,V&gt;[] tab &#x3D; table;</span><br><span class="line">                int index &#x3D; (tab.length - 1) &amp; hash;</span><br><span class="line">                HashEntry&lt;K,V&gt; first &#x3D; entryAt(tab, index);</span><br><span class="line">                for (HashEntry&lt;K,V&gt; e &#x3D; first;;) &#123;</span><br><span class="line">                    if (e !&#x3D; null) &#123;</span><br><span class="line">                        K k;</span><br><span class="line"> &#x2F;&#x2F; 遍历该 HashEntry，如果不为空则判断传入的 key 和当前遍历的 key 是否相等，相等则覆盖旧的 value。</span><br><span class="line">                        if ((k &#x3D; e.key) &#x3D;&#x3D; key ||</span><br><span class="line">                            (e.hash &#x3D;&#x3D; hash &amp;&amp; key.equals(k))) &#123;</span><br><span class="line">                            oldValue &#x3D; e.value;</span><br><span class="line">                            if (!onlyIfAbsent) &#123;</span><br><span class="line">                                e.value &#x3D; value;</span><br><span class="line">                                ++modCount;</span><br><span class="line">                            &#125;</span><br><span class="line">                            break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        e &#x3D; e.next;</span><br><span class="line">                    &#125;</span><br><span class="line">                    else &#123;</span><br><span class="line">                 &#x2F;&#x2F; 不为空则需要新建一个 HashEntry 并加入到 Segment 中，同时会先判断是否需要扩容。</span><br><span class="line">                        if (node !&#x3D; null)</span><br><span class="line">                            node.setNext(first);</span><br><span class="line">                        else</span><br><span class="line">                            node &#x3D; new HashEntry&lt;K,V&gt;(hash, key, value, first);</span><br><span class="line">                        int c &#x3D; count + 1;</span><br><span class="line">                        if (c &gt; threshold &amp;&amp; tab.length &lt; MAXIMUM_CAPACITY)</span><br><span class="line">                            rehash(node);</span><br><span class="line">                        else</span><br><span class="line">                            setEntryAt(tab, index, node);</span><br><span class="line">                        ++modCount;</span><br><span class="line">                        count &#x3D; c;</span><br><span class="line">                        oldValue &#x3D; null;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">               &#x2F;&#x2F;释放锁</span><br><span class="line">                unlock();</span><br><span class="line">            &#125;</span><br><span class="line">            return oldValue;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="Hashmap"><a href="#Hashmap" class="headerlink" title="Hashmap"></a>Hashmap</h1><h2 id="1-存储结构"><a href="#1-存储结构" class="headerlink" title="1.存储结构"></a>1.存储结构</h2><p>1.7为<strong>数组和链表组合构成</strong>的数据结构,1.8之后为<strong>数组加链表加红黑树</strong>(链表长度大于8转为红黑树)，数组里面每个地方都存了Key-Value这样的实例，在Java7叫Entry在Java8中叫Node。 HashMap最多只允许一条记录的键为null，允许多条记录的值为null，在put插入的时候会根据key的hash去计算一个index值。</p>
+<p><img src="D:\Blog\myblog\source\image\hashmap.png" alt="img"></p>
+<h2 id="2-字段"><a href="#2-字段" class="headerlink" title="2.字段"></a>2.字段</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int threshold;             &#x2F;&#x2F; 所能容纳的key-value对极限 </span><br><span class="line">final float loadFactor;    &#x2F;&#x2F; 负载因子</span><br><span class="line">int modCount;  </span><br><span class="line">int size;</span><br><span class="line">int length</span><br></pre></td></tr></table></figure>
 
-<p>先第一步的时候会尝试获取锁，如果获取失败肯定就有其他线程存在竞争，则利用 <code>scanAndLockForPut()</code> 自旋获取锁。</p>
-<ol>
-<li>尝试自旋获取锁。</li>
-<li>如果重试的次数达到了 <code>MAX_SCAN_RETRIES</code> 则改为阻塞锁获取，保证能获取成功。</li>
-</ol>
-<h3 id="1-2-get操作"><a href="#1-2-get操作" class="headerlink" title="1.2 get操作"></a>1.2 get操作</h3><p>get 逻辑比较简单，只需要将 Key 通过 Hash 之后定位到具体的 Segment ，再通过一次 Hash 定位到具体的元素上。</p>
-<p>由于 HashEntry 中的 value 属性是用 volatile 关键词修饰的，保证了内存可见性，所以每次获取时都是最新值。</p>
-<p>因为同样需要保证segment的分散性，所以segment也要为2的n次方</p>
-<h2 id="2-1-8中的实现"><a href="#2-1-8中的实现" class="headerlink" title="2.1.8中的实现"></a>2.1.8中的实现</h2><p>跟HashMap很像，也把之前的HashEntry改成了Node，但是作用不变，把值和next采用了volatile去修饰，保证了可见性，并且也引入了红黑树，在链表大于一定值的时候会转换（默认是8）。其中抛弃了原有的 Segment 分段锁，而采用了 <code>CAS + synchronized</code> 来保证并发安全性。</p>
-<h3 id="2-1-put操作"><a href="#2-1-put操作" class="headerlink" title="2.1 put操作"></a>2.1 put操作</h3><p>根据 key 计算出 hashcode 。</p>
-<p>判断是否需要进行初始化。</p>
-<p>即为当前 key 定位出的 Node，如果为空表示当前位置可以写入数据，利用 CAS 尝试写入，失败则自旋保证成功。</p>
-<p>如果当前位置的 <code>hashcode == MOVED == -1</code>,则需要进行扩容。</p>
-<p>如果都不满足，则利用 synchronized 锁写入数据。</p>
-<p>如果数量大于 <code>TREEIFY_THRESHOLD</code> 则要转换为红黑树。</p>
-<p>CAS —Compare and swap</p>
-<p>CAS 是乐观锁的一种实现方式，是一种轻量级锁，是一种乐观策略，认为并发操作并不总会发生。</p>
-<p>但是并不能保证绝对的并发安全，例如ABA问题(可以加时间戳或者版本号进行改进)</p>
-<h3 id="2-2-get操作"><a href="#2-2-get操作" class="headerlink" title="2.2 get操作"></a>2.2 get操作</h3><ul>
-<li>根据计算出来的 hashcode 寻址，如果就在桶上那么直接返回值。</li>
-<li>如果是红黑树那就按照树的方式获取值。</li>
-<li>就不满足那就按照链表的方式遍历获取值。</li>
+<h2 id="3-Hash算法"><a href="#3-Hash算法" class="headerlink" title="3.Hash算法"></a>3.Hash算法</h2><p>Hash算法本质上分为三步</p>
+<p>1.求hashcode()</p>
+<p>2.高位运算</p>
+<p>3.取模运算(使元素分布更均匀)</p>
+<p>h&amp; (length-1)运算等价于对length取模，也就是h%length，但是&amp;比%具有更高的效率。</p>
+<h2 id="4-Put方法"><a href="#4-Put方法" class="headerlink" title="4.Put方法"></a>4.Put方法</h2><p>java8之前是<strong>头部插入</strong>，java8之后是<strong>尾部插入</strong>，在扩容时会保持链表元素原本的顺序，就不会出现链表成环的问题了</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/uChmeeX1FpwgWpRnXONPxeCYuBLK2tuNAkwVc0kP6ZoBcXubNg4BiaMbZlicQf7lFlwWgp79DDTNB9xOrY4oOUlg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/uChmeeX1FpwgWpRnXONPxeCYuBLK2tuNYwElHbLux4e7LXN8afWrRulD2h4l7fNxibM335vvDNhLtPxZiaWsP3EA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p>put源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"> 1 public V put(K key, V value) &#123;</span><br><span class="line"> 2     &#x2F;&#x2F; 对key的hashCode()做hash</span><br><span class="line"> 3     return putVal(hash(key), key, value, false, true);</span><br><span class="line"> 4 &#125;</span><br><span class="line"> 5 </span><br><span class="line"> 6 final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line"> 7                boolean evict) &#123;</span><br><span class="line"> 8     Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span><br><span class="line"> 9     &#x2F;&#x2F; 步骤①：tab为空则创建</span><br><span class="line">10     if ((tab &#x3D; table) &#x3D;&#x3D; null || (n &#x3D; tab.length) &#x3D;&#x3D; 0)</span><br><span class="line">11         n &#x3D; (tab &#x3D; resize()).length;</span><br><span class="line">12     &#x2F;&#x2F; 步骤②：计算index，并对null做处理 </span><br><span class="line">13     if ((p &#x3D; tab[i &#x3D; (n - 1) &amp; hash]) &#x3D;&#x3D; null) </span><br><span class="line">14         tab[i] &#x3D; newNode(hash, key, value, null);</span><br><span class="line">15     else &#123;</span><br><span class="line">16         Node&lt;K,V&gt; e; K k;</span><br><span class="line">17         &#x2F;&#x2F; 步骤③：节点key存在，直接覆盖value</span><br><span class="line">18         if (p.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">19             ((k &#x3D; p.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">20             e &#x3D; p;</span><br><span class="line">21         &#x2F;&#x2F; 步骤④：判断该链为红黑树</span><br><span class="line">22         else if (p instanceof TreeNode)</span><br><span class="line">23             e &#x3D; ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">24         &#x2F;&#x2F; 步骤⑤：该链为链表</span><br><span class="line">25         else &#123;</span><br><span class="line">26             for (int binCount &#x3D; 0; ; ++binCount) &#123;</span><br><span class="line">27                 if ((e &#x3D; p.next) &#x3D;&#x3D; null) &#123;</span><br><span class="line">28                     p.next &#x3D; newNode(hash, key,value,null);</span><br><span class="line">                        &#x2F;&#x2F;链表长度大于8转换为红黑树进行处理</span><br><span class="line">29                     if (binCount &gt;&#x3D; TREEIFY_THRESHOLD - 1) &#x2F;&#x2F; -1 for 1st  </span><br><span class="line">30                         treeifyBin(tab, hash);</span><br><span class="line">31                     break;</span><br><span class="line">32                 &#125;</span><br><span class="line">                    &#x2F;&#x2F; key已经存在直接覆盖value</span><br><span class="line">33                 if (e.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">34                     ((k &#x3D; e.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))                                          break;</span><br><span class="line">36                 p &#x3D; e;</span><br><span class="line">37             &#125;</span><br><span class="line">38         &#125;</span><br><span class="line">39         </span><br><span class="line">40         if (e !&#x3D; null) &#123; &#x2F;&#x2F; existing mapping for key</span><br><span class="line">41             V oldValue &#x3D; e.value;</span><br><span class="line">42             if (!onlyIfAbsent || oldValue &#x3D;&#x3D; null)</span><br><span class="line">43                 e.value &#x3D; value;</span><br><span class="line">44             afterNodeAccess(e);</span><br><span class="line">45             return oldValue;</span><br><span class="line">46         &#125;</span><br><span class="line">47     &#125;</span><br><span class="line"></span><br><span class="line">48     ++modCount;</span><br><span class="line">49     &#x2F;&#x2F; 步骤⑥：超过最大容量 就扩容</span><br><span class="line">50     if (++size &gt; threshold)</span><br><span class="line">51         resize();</span><br><span class="line">52     afterNodeInsertion(evict);</span><br><span class="line">53     return null;</span><br><span class="line">54 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>步骤</p>
+<p>①.判断键值对数组table[i]是否为空或为null，否则执行resize()进行扩容；</p>
+<p>②.根据键值key计算hash值得到插入的数组索引i，如果table[i]==null，直接新建节点添加，转向⑥，如果table[i]不为空，转向③；</p>
+<p>③.判断table[i]的首个元素是否和key一样，如果相同直接覆盖value，否则转向④，这里的相同指的是hashCode以及equals；</p>
+<p>④.判断table[i] 是否为treeNode，即table[i] 是否是红黑树，如果是红黑树，则直接在树中插入键值对，否则转向⑤；</p>
+<p>⑤.遍历table[i]，判断链表长度是否大于8，大于8的话把链表转换为红黑树，在红黑树中执行插入操作，否则进行链表的插入操作；遍历过程中若发现key已经存在直接覆盖value即可；</p>
+<p>⑥.插入成功后，判断实际存在的键值对数量size是否超多了最大容量threshold，如果超过，进行扩容。</p>
+<h2 id="5-Resize"><a href="#5-Resize" class="headerlink" title="5.Resize"></a>5.Resize</h2><p>Resize条件</p>
+<ul>
+<li>Capacity：HashMap当前长度。</li>
+<li>LoadFactor：负载因子，默认值0.75f。</li>
 </ul>
+<p>当前容量达到capacity*loadfactor时，扩容</p>
+<p>扩容步骤</p>
+<ul>
+<li>扩容：创建一个新的Entry空数组，长度是原数组的2倍。(元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置)</li>
+<li>ReHash：遍历原Entry数组，把所有的Entry重新Hash到新数组。</li>
+</ul>
+<p>因此，我们在扩充HashMap的时候，不需要像JDK1.7的实现那样重新计算hash，只需要看看原来的hash值新增的那个bit是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+oldCap”，可以看看下图为16扩充为32的resize示意图</p>
+<p><img src="D:\Blog\myblog\source\image\a285d9b2da279a18b052fe5eed69afe9_b.png" alt="img"></p>
+<h2 id="6-线程安全"><a href="#6-线程安全" class="headerlink" title="6.线程安全"></a>6.线程安全</h2><p>在并发情况下出现环形链表，next节点永远不为空，死循环获取entry</p>
+<p>所以使用Concurrenthashmap</p>
+<h2 id="7-重写equals方法的时候需要重写hashCode方法呢？"><a href="#7-重写equals方法的时候需要重写hashCode方法呢？" class="headerlink" title="7.重写equals方法的时候需要重写hashCode方法呢？"></a>7.重写equals方法的时候需要重写hashCode方法呢？</h2><p>在java中，所有的对象都是继承于Object类。Ojbect类中有两个方法equals、hashCode，这两个方法都是用来比较两个对象是否相等的。</p>
+<p>当我们将equals方法重写后有必要将hashCode方法也重写，这样做才能保证不违背hashCode方法中“<strong>相同对象必须有相同哈希值</strong>”的约定</p>
+<p>在未重写equals方法我们是继承了object的equals方法，<strong>那里的 equals是比较两个对象的内存地址</strong>，显然我们new了2个对象内存地址肯定不一样</p>
+<ul>
+<li>对于值对象，==比较的是两个对象的值</li>
+<li>对于引用对象，比较的是两个对象的地址</li>
+</ul>
+<p>所以如果我们对equals方法进行了重写，建议一定要对hashCode方法重写，以保证相同的对象返回相同的hash值，不同的对象返回不同的hash值。</p>
+<p>不然一个链表的对象，你哪里知道你要找的是哪个，到时候发现hashCode都一样</p>
+<h2 id="8-和hashtable的比较"><a href="#8-和hashtable的比较" class="headerlink" title="8.和hashtable的比较"></a>8.和hashtable的比较</h2><p>1.线程是否安全(hashtable 对数据操作时都会上锁)</p>
+<p>2.是否为null(hashtable 不允许 hashmap允许)</p>
+<p>3.扩容机制不同(hashtable+1 hashmap*2)</p>
+<p>4.迭代器不同 HashMap 中的 Iterator 迭代器是 <strong>fail-fast</strong> 的，而 Hashtable 的 Enumerator 不是 <strong>fail-fast</strong> 的</p>
+<p><strong>fail-fast</strong></p>
+<p>是java集合中的一种机制， 在用迭代器遍历一个集合对象时，如果遍历过程中对集合对象的内容进行了修改（增加、删除、修改），则会抛出Concurrent Modification Exception。</p>
+<p>迭代器在遍历时直接访问集合中的内容，并且在遍历过程中使用一个 modCount 变量。</p>
+<p>集合在被遍历期间如果内容发生变化，就会改变modCount的值。</p>
+<p>每当迭代器使用hashNext()/next()遍历下一个元素之前，都会检测modCount变量是否为expectedmodCount值，是的话就返回遍历；否则抛出异常，终止遍历。</p>
+<p><strong>Tip</strong>：这里异常的抛出条件是检测到 modCount！=expectedmodCount 这个条件。如果集合发生变化时修改modCount值刚好又设置为了expectedmodCount值，则异常不会抛出。</p>
+<p>因此，不能依赖于这个异常是否抛出而进行并发操作的编程，这个异常只建议用于检测并发修改的bug。</p>
 
       
     </div>
@@ -851,6 +1134,9 @@
 
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="线程的生命周期和通信创建线程1、继承 Thread 类，然后调用 start() 方法。使用简单方便，但是由于Java规定类只能继承一个类，所以就无法继承其他类了。 12345678910111213141516171819public class ThreadTest extends Thread&amp;#123;    &#x2F;&#x2F;重写run()方法，run()方法的方法体是线程执行体">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程的生命周期和通信">
+<meta property="og:url" content="http://yoursite.com/2020/08/17/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E9%80%9A%E4%BF%A1/index.html">
+<meta property="og:site_name" content="BLOG">
+<meta property="og:description" content="线程的生命周期和通信创建线程1、继承 Thread 类，然后调用 start() 方法。使用简单方便，但是由于Java规定类只能继承一个类，所以就无法继承其他类了。 12345678910111213141516171819public class ThreadTest extends Thread&amp;#123;    &#x2F;&#x2F;重写run()方法，run()方法的方法体是线程执行体">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-17T08:50:02.000Z">
+<meta property="article:modified_time" content="2020-08-17T08:50:19.916Z">
+<meta property="article:author" content="Lucius Long">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/2020/08/17/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E9%80%9A%E4%BF%A1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>线程的生命周期和通信 | BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">BLOG</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Discover the new world</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E9%80%9A%E4%BF%A1"><span class="nav-number">1.</span> <span class="nav-text">线程的生命周期和通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">创建线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%92%8C%E7%BB%88%E6%AD%A2%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">启动和终止线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="nav-number">1.3.</span> <span class="nav-text">线程的通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E5%BE%85%E9%80%9A%E7%9F%A5%E6%9C%BA%E5%88%B6"><span class="nav-number">1.3.1.</span> <span class="nav-text">等待通知机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sleep%E5%92%8Cwait%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.2.</span> <span class="nav-text">Sleep和wait的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thread-join"><span class="nav-number">1.3.3.</span> <span class="nav-text">thread.join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#contdownlatch"><span class="nav-number">1.3.4.</span> <span class="nav-text">contdownlatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#threadlocal"><span class="nav-number">1.3.5.</span> <span class="nav-text">threadlocal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CyclicBarrier"><span class="nav-number">1.3.6.</span> <span class="nav-text">CyclicBarrier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Semaphore"><span class="nav-number">1.3.7.</span> <span class="nav-text">Semaphore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.8.</span> <span class="nav-text">区别</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Lucius Long</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E9%80%9A%E4%BF%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lucius Long">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BLOG">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          线程的生命周期和通信
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-17 16:50:02 / Modified: 16:50:19" itemprop="dateCreated datePublished" datetime="2020-08-17T16:50:02+08:00">2020-08-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="线程的生命周期和通信"><a href="#线程的生命周期和通信" class="headerlink" title="线程的生命周期和通信"></a>线程的生命周期和通信</h1><h2 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h2><p>1、继承 Thread 类，然后调用 start() 方法。使用简单方便，但是由于Java规定类只能继承一个类，所以就无法继承其他类了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class ThreadTest extends Thread&#123;</span><br><span class="line">    &#x2F;&#x2F;重写run()方法，run()方法的方法体是线程执行体</span><br><span class="line">    public void run()&#123;</span><br><span class="line">        for(int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">            &#x2F;&#x2F;使用线程的getName()方法可以直接获取当前线程的名称</span><br><span class="line">            System.out.println(this.getName() + &quot;   &quot; + i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        &#x2F;&#x2F;输出Java程序运行时默认运行的主线程名称</span><br><span class="line">        System.out.println(Thread.currentThread().getName());</span><br><span class="line">        &#x2F;&#x2F;创建第一个线程并开始执行</span><br><span class="line">        new ThreadTest().start();</span><br><span class="line">        &#x2F;&#x2F;创建第二个线程并开始执行</span><br><span class="line">        new ThreadTest().start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、实现 Runnable 接口的run ()方法，然后再用 Thread 类包裹后，调用 start() 方法。因为类可以实现多个接口，因此扩展性更好，但是还需要再创建Thread对象，并调用start() 方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class ThreadTest implements Runnable&#123;</span><br><span class="line">    private int i;</span><br><span class="line">    &#x2F;&#x2F;重写run()方法，run()方法的方法体是线程执行体</span><br><span class="line">    public void run()&#123;</span><br><span class="line">        &#x2F;&#x2F;实现Runnable接口时，只能使用如下方法获取线程名</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + &quot;   &quot; + i);</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        ThreadTest tt &#x3D; new ThreadTest();</span><br><span class="line">        &#x2F;&#x2F;创建第一个线程并开始执行</span><br><span class="line">        &#x2F;&#x2F;输出   新线程1   0</span><br><span class="line">        new Thread(tt,&quot;新线程1&quot;).start();</span><br><span class="line">        &#x2F;&#x2F;创建第二个线程并开始执行</span><br><span class="line">        &#x2F;&#x2F;输出   新线程2   1</span><br><span class="line">        new Thread(tt,&quot;新线程2&quot;).start();</span><br><span class="line">        &#x2F;&#x2F;使用Lambda表达式创建Runnable对象</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、实现 Callable 接口的 call ()方法，用 FutureTask 类包裹 Callable 对象。然后再用 Thread 类包裹 FutureTask 类，并调用 start() 方法。操作较为繁琐，但是可以获取线程执行结束后的结果值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import java.util.concurrent.FutureTask;</span><br><span class="line"></span><br><span class="line">public class ThreadTest &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        &#x2F;&#x2F;使用FutureTask来包装Callable对象</span><br><span class="line">        &#x2F;&#x2F;使用Lambda表达式来创建Callable&lt;Integer&gt;对象</span><br><span class="line">        FutureTask&lt;Integer&gt; task &#x3D; new FutureTask&lt;&gt;(()-&gt;&#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + &quot;   &quot; + &quot;开始执行任务！&quot;);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;);</span><br><span class="line">        &#x2F;&#x2F;实质还是以Callable对象来创建并启动线程</span><br><span class="line">        &#x2F;&#x2F;输出 新线程   开始执行任务！</span><br><span class="line">        new Thread(task,&quot;新线程&quot;).start();</span><br><span class="line">        try&#123;</span><br><span class="line">            &#x2F;&#x2F;获取线程的返回值</span><br><span class="line">            &#x2F;&#x2F;输出 0</span><br><span class="line">            System.out.print(task.get());</span><br><span class="line">        &#125;catch (Exception ex)&#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    采用Runnable和Callable接口的方式创建多线程的优缺点：</p>
+<ul>
+<li>线程类只实现了Runnable接口或者Callable接口，还可以继承其他类。</li>
+<li>多个线程可以共享一个target对象，非常适合多个相同线程来处理同一份资源的情况，从而可以将CPU、代码和数据分开，形成清晰的模型，体现了面向对象的编程思想。</li>
+<li>编程稍微复杂些。</li>
+</ul>
+<p>​    采用继承Thread类的方式创建多线程的优缺点：</p>
+<ul>
+<li>线程类已经继承了Thread类，不能再继承其他类。</li>
+<li>编程比较简单。</li>
+</ul>
+<h2 id="启动和终止线程"><a href="#启动和终止线程" class="headerlink" title="启动和终止线程"></a>启动和终止线程</h2><p>随着start方法进行启动，随着run方法的执行完毕，线程也随之终止</p>
+<p>其他线程调用该线程的interrupt()方法对其进行中断操作，isInterrupted()来进行判断是否被中断</p>
+<p>可以通过cancel()对线程进行终止</p>
+<h2 id="线程的通信"><a href="#线程的通信" class="headerlink" title="线程的通信"></a>线程的通信</h2><h3 id="等待通知机制"><a href="#等待通知机制" class="headerlink" title="等待通知机制"></a>等待通知机制</h3><p>等待通知机制，是指一个线程A调用了对象O的wait()方法进入等待状态，而另一个线程B调用了对象O的notify()或notifyall()方法，线程a收到通知后从对象o的wait()方法返回，进而执行后续操作。</p>
+<p>notify()：通知一个线程，从wait方法返回，而返回的前提是该线程获取到了对象的锁</p>
+<p>notifyall()：通知所有线程</p>
+<p>wait()：线程进入waiting状态，并释放锁</p>
+<h3 id="Sleep和wait的区别"><a href="#Sleep和wait的区别" class="headerlink" title="Sleep和wait的区别"></a>Sleep和wait的区别</h3><p>1，所属的类不同：</p>
+<blockquote>
+<p>sleep方法是定义在Thread上<br>wait方法是定义在Object上</p>
+</blockquote>
+<p>2，对于锁资源的处理方式不同</p>
+<blockquote>
+<p>sleep不会释放锁<br>wait会释放锁</p>
+</blockquote>
+<p>3，使用范围：</p>
+<blockquote>
+<p>sleep可以使用在任何代码块<br>wait必须在同步方法或同步代码块执行</p>
+</blockquote>
+<p>4，后续操作</p>
+<blockquote>
+<p>sleep不需要被唤醒</p>
+<p>wait需要</p>
+</blockquote>
+<p>生命周期</p>
+<p>1，当线程调用wait()或者join时，线程都会进入到waiting状态，当调用notify或notifyAll时，或者join的线程执行结束后，会进入runnable状态</p>
+<p>2，当线程调用sleep(time)，或者wait(time)时，进入timed waiting状态，</p>
+<h3 id="thread-join"><a href="#thread-join" class="headerlink" title="thread.join"></a>thread.join</h3><p>若线程a执行了thread.join语句，则线程a等待thread线程终止后才从thread.join()返回</p>
+<h3 id="contdownlatch"><a href="#contdownlatch" class="headerlink" title="contdownlatch"></a>contdownlatch</h3><p>跟join方法效果一样，但是功能更多</p>
+<p>可以等待n个线程完成</p>
+<p>比如解析n个sheet的excel</p>
+<p>同时await方法避免某个线程处理较慢阻塞主线程</p>
+<h3 id="threadlocal"><a href="#threadlocal" class="headerlink" title="threadlocal"></a>threadlocal</h3><p>即线程变量，是一个以threadlocal对象为键，任意对象为值的存储结构。</p>
+<p>通过set方法设置值，get方法获取值</p>
+<p>ThreadLocal的作用主要是做数据隔离，填充的数据只属于当前线程，变量的数据对别的线程而言是相对隔离的，在多线程环境下，如何防止自己的变量被其它线程篡改。</p>
+<p>Spring采用Threadlocal的方式，来保证单个线程中的数据库操作使用的是同一个数据库连接，同时，采用这种方式可以使业务层使用事务时不需要感知并管理connection对象，通过传播级别，巧妙地管理多个事务配置之间的切换，挂起和恢复。</p>
+<h3 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h3><p>循环屏障</p>
+<p>一组线程会互相等待，直到所有线程都到达一个同步点。这个就非常有意思了，就像一群人被困到了一个栅栏前面，只有等最后一个人到达之后，他们才可以合力把栅栏（屏障）突破。</p>
+<p>CyclicBarrier 提供了两种构造方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public CyclicBarrier(int parties) &#123;</span><br><span class="line">    this(parties, null);</span><br><span class="line">&#125;</span><br><span class="line">public CyclicBarrier(int parties, Runnable barrierAction) &#123;</span><br><span class="line">    if (parties &lt;&#x3D; 0) throw new IllegalArgumentException();</span><br><span class="line">    this.parties &#x3D; parties;</span><br><span class="line">    this.count &#x3D; parties;</span><br><span class="line">    this.barrierCommand &#x3D; barrierAction;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个构造的参数，指的是需要几个线程一起到达，才可以使所有线程取消等待。第二个构造，额外指定了一个参数，用于在所有线程达到屏障时，优先执行 barrierAction。</p>
+<h3 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h3><p>信号量，用来控制同一时间，资源可被访问的线程数量，一般可用于流量的控制。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ol>
+<li>CountDownLatch 是一个线程等待其他线程， CyclicBarrier 是多个线程互相等待。</li>
+<li>CountDownLatch 的计数是减 1 直到 0，CyclicBarrier 是加 1，直到指定值。</li>
+<li>CountDownLatch 是一次性的， CyclicBarrier  可以循环利用。</li>
+<li>CyclicBarrier 可以在最后一个线程达到屏障之前，选择先执行一个操作。</li>
+<li>Semaphore ，需要拿到许可才能执行，并可以选择公平和非公平模式。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/17/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="prev" title="线程池">
+                  <i class="fa fa-chevron-left"></i> 线程池
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/17/%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" rel="next" title="线程基础">
+                  线程基础 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucius Long</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
